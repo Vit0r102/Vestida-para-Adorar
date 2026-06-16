@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vestida para Adorar — Moda Feminina Cristã com Propósito</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            blush: { DEFAULT: '#f0c8c0', light: '#fdf0ee', deep: '#d4897a' },
+            rose:  { muted: '#c9837a',  dark:  '#a05a52' },
+            gold:  { DEFAULT: '#c9a96e', light: '#e8d5b0' },
+            linen: { DEFAULT: '#f7f0e8', dark:  '#ede4d8' },
+            ink:   { DEFAULT: '#3a2e2c', soft:  '#6b5753' },
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', 'serif'],
+            body:    ['Jost', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+</head>
+
+<body>
+
+<!-- BARRA DE PROGRESSO DO SCROLL -->
+<div id="scroll-progress"></div>
+
+<!-- ═══════════════════════════════════════════════════
+     PETAL PARTICLES (decorative)
+════════════════════════════════════════════════════ -->
+<div id="petals"></div>
+
+<!-- ═══════════════════════════════════════════════════
+     TOP ANNOUNCEMENT BAR
+════════════════════════════════════════════════════ -->
+<div class="top-bar text-white text-center py-2 px-4" style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">
+  <span id="top-bar-msg">Vista-se para Adorar</span>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════════════ -->
+<nav id="navbar" class="fixed w-full z-50 top-8" style="background:rgba(253,248,245,0.85);backdrop-filter:blur(16px);">
+  <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between gap-6">
+
+    <!-- Logo -->
+    <a href="./img/Logo1.png" class="flex items-center gap-10 flex-shrink-0">
+      <div class="w-14 h-14 rounded-full flex items-center justify-center overflow-hidden border-2 border-gold-light" style="border-color:var(--gold-light);background:var(--blush-light);">
+        <!-- Logo na Navbar-->
+       <img src="./img/Logo1.png" alt="Logo" class="w-18 h-18 object-cover" />
+      </div>
+      <div class="hidden sm:block">
+        <div class="font-display font-semibold leading-tight" style="color:var(--ink);font-size:1rem;">Vestida para</div>
+        <div class="font-display italic leading-tight" style="color:var(--rose-muted);font-size:0.85rem;">Adorar</div>
+      </div>
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="hidden lg:flex items-center gap-8">
+      <li><a href="#inicio" class="nav-link">Início</a></li>
+      <li><a href="./Vestidos.html" class="nav-link">Loja</a></li>
+      <li><a href="#novidades" class="nav-link">Novidades</a></li>
+      <li><a href="#sobre" class="nav-link">Sobre Nós</a></li>
+      <li><a href="#contato" class="nav-link">Contato</a></li>
+      <li><a href="#Ajuda" class="nav-link">Ajuda</a></li>
+    </ul>
+
+    <!-- Icons -->
+    <div class="flex items-center gap-3">
+      <button class="icon-btn hidden sm:flex w-9 h-9 rounded-full items-center justify-center transition-colors" style="color:var(--ink-soft);" onmouseover="this.style.background='var(--blush-light)'" onmouseout="this.style.background='transparent'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="icon-btn hidden sm:flex w-9 h-9 rounded-full items-center justify-center transition-colors" style="color:var(--ink-soft);" onmouseover="this.style.background='var(--blush-light)'" onmouseout="this.style.background='transparent'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button class="icon-btn w-9 h-9 rounded-full flex items-center justify-center relative transition-colors" style="color:var(--ink-soft);" onmouseover="this.style.background='var(--blush-light)'" onmouseout="this.style.background='transparent'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center text-white" style="background:var(--rose-dark);font-size:0.55rem;font-weight:700;">3</span>
+      </button>
+      <!-- Hamburger -->
+      <button id="hamburger" class="lg:hidden w-9 h-9 rounded-full flex items-center justify-center" style="color:var(--ink);" onclick="toggleMenu()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 z-40 flex" style="top:0">
+  <div class="w-72 h-full flex flex-col pt-28 px-8" style="background:var(--white);box-shadow:4px 0 40px rgba(58,46,44,0.12);">
+    <ul class="space-y-1">
+      <li><a href="#inicio" class="block py-3 font-display text-xl" style="color:var(--ink);border-bottom:1px solid var(--linen-dark);" onclick="toggleMenu()">Início</a></li>
+      <li><a href="./Vestidos.html" class="block py-3 font-display text-xl" style="color:var(--ink);border-bottom:1px solid var(--linen-dark);" onclick="toggleMenu()">Loja</a></li>
+      <li><a href="#novidades" class="block py-3 font-display text-xl" style="color:var(--ink);border-bottom:1px solid var(--linen-dark);" onclick="toggleMenu()">Novidades</a></li>
+      <li><a href="#sobre" class="block py-3 font-display text-xl" style="color:var(--ink);border-bottom:1px solid var(--linen-dark);" onclick="toggleMenu()">Sobre Nós</a></li>
+      <li><a href="#contato" class="block py-3 font-display text-xl" style="color:var(--ink);" onclick="toggleMenu()">Contato</a></li>
+    </ul>
+    <div class="mt-8">
+      <a href="https://wa.me/5500000000000" class="btn-primary w-full justify-center">Fale Conosco</a>
+    </div>
+  </div>
+  <div class="flex-1 bg-black/30 backdrop-blur-sm" onclick="toggleMenu()"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     HERO SECTION
+════════════════════════════════════════════════════ -->
+<section id="inicio" class="hero-section min-h-screen flex items-center pt-24 pb-16 px-6" style="position:relative;">
+  <div class="noise-overlay"></div>
+
+  <!-- Decorative circles -->
+  <div class="hero-ornament" style="width:400px;height:400px;background:radial-gradient(circle,rgba(240,200,192,0.25) 0%,transparent 70%);top:-100px;left:-150px;"></div>
+  <div class="hero-ornament" style="width:300px;height:300px;background:radial-gradient(circle,rgba(201,169,110,0.15) 0%,transparent 70%);bottom:-80px;left:40%;"></div>
+
+  <div class="max-w-7xl mx-auto w-full">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+      <!-- Text -->
+      <div class="order-2 lg:order-1">
+        <p class="section-tag reveal delay-100" style="font-size:0.72rem;">Moda com Propósito</p>
+
+        <h1 class="font-display reveal delay-200 hero-shimmer-text" style="font-size:clamp(2.8rem,5vw,4.2rem);font-weight:300;line-height:1.12;margin-bottom:20px;">
+          Moda Feminina<br/>
+         
+        </h1>
+
+        <p class="reveal delay-300" style="color:var(--gold);font-size:1rem;line-height:1.8;max-width:420px;margin-bottom:32px;">
+          Peças que unem fé, modéstia, elegância e conforto para mulheres que desejam se vestir com identidade e adorar em todos os momentos.
+        </p>
+
+        <!-- Feature bullets -->
+        <div class="space-y-2 mb-10 reveal delay-400">
+          <div class="tick-item"><span class="tick-dot"></span><span style="color:var(--blush-light);font-size:0.88rem;">Tamanhos exclusivos do 42 ao 50</span></div>
+          <div class="tick-item"><span class="tick-dot"></span><span style="color:var(--blush-light);font-size:0.88rem;">Peças pensadas para valorizar seu corpo</span></div>
+          <div class="tick-item"><span class="tick-dot"></span><span style="color:var(--blush-light);font-size:0.88rem;">Enviamos para todo o Brasil com cuidado</span></div>
+        </div>
+
+        <div class="flex flex-wrap gap-4 reveal delay-500">
+          <a href="#loja" class="btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Conheça a Coleção
+          </a>
+          <a href="#sobre" class="btn-outline">Nossa Essência</a>
+        </div>
+      </div>
+
+      <!-- Image + Badge -->
+      <div class="order-1 lg:order-2 flex justify-center relative">
+        <!-- Badge -->
+        <div class="size-badge flex top-4 right-4 lg:right-0 z-10 text-center" style="min-width:130px;">
+          <div style="color:var(--rose-muted);font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;">
+            <svg xmlns="http://www.w3.org/2000/svg" class="inline w-3 h-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Por que modestia é liberdade. Looks incriveis que respeitam seus principios e fé.
+          </div>
+          <!-- <div class="font-display" style="font-size:2rem;font-weight:600;color:var(--ink);line-height:1;">42 ao 50</div>  LETRA GRANDE AQUI--> 
+          <div class="gold-line mx-auto my-2"></div>
+          <!-- <div style="color:var(--ink-soft);font-size:0.72rem;line-height:1.4;">Moda feita para<br/>valorizar todos<br/>os corpos</div>  LETRA PEQUENA AQUI-->
+        </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     VERSÍCULO INSPIRADOR
+════════════════════════════════════════════════════ -->
+<section class="verse-banner" style="padding:60px 24px;">
+  <div class="max-w-3xl mx-auto text-center">
+    <div class="faith-bubble reveal" style="margin:0 auto 24px;">Palavra que Inspira</div>
+    <p class="verse-text reveal delay-100">
+      "Ela se veste de força e dignidade,<br/>e ri do futuro com alegria."
+    </p>
+    <p class="verse-reference reveal delay-200">Provérbios 31:25</p>
+    <div class="gold-line-animated reveal delay-300" style="margin-top:24px;"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     ESTATÍSTICAS
+════════════════════════════════════════════════════ -->
+<section class="stats-strip">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 items-center">
+
+  
+      <div class="stat-item reveal delay-200">
+        <span class="stat-number-big" data-target="10">20</span>
+        <span class="stat-label-sm">De vestidos para você escolher</span>
+      </div>
+
+      <div class="stat-item reveal delay-300">
+        <span class="stat-number-big">42–50</span>
+        <span class="stat-label-sm">Tamanhos Disponíveis</span>
+      </div>
+
+    
+      <div class="stat-item reveal delay-400">
+        <span class="stat-number-big">100%</span>
+        <span class="stat-label-sm">Moda com Propósito</span>
+      </div>
+
+      <div class="stat-item reveal delay-500">
+        <span class="stat-label-sm">Muitas mulheres são exemplares, mas você a todas supera!<br/>Provérbios 31:29</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     CATEGORIES
+════════════════════════════════════════════════════ -->
+<!--<section id="loja" style="background:var(--white);padding:80px 24px;">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <p class="section-tag reveal">Explore</p>
+      <h2 class="font-display reveal delay-100" style="font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--ink);">
+        Tudo o que você precisa,<br/><em style="color:var(--rose-dark);">em um só lugar</em>
+      </h2>
+      <div class="divider-ornament reveal delay-200">
+        <span></span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+        <span></span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 md:grid-cols-5 gap-6 lg:gap-10">
+
+       TROQUE as imagens pelas fotos dos seus produtos 
+      <div class="cat-card text-center reveal delay-100">
+        <div class="cat-img-ring mb-4">
+          <img src="./img/Roupa1.png" alt="Vestidos"/>
+        </div>
+        <h3 class="font-display" style="font-size:1.1rem;color:var(--ink);margin-bottom:4px;">Vestidos</h3>
+        <a href="Vestidos.html" style="color:var(--gold);font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;">Ver Coleção →</a>
+      </div>
+
+      <div class="cat-card text-center reveal delay-200">
+        <div class="cat-img-ring mb-4">
+          <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=300&q=80" alt="Saias"/>
+        </div>
+        <h3 class="font-display" style="font-size:1.1rem;color:var(--ink);margin-bottom:4px;">Saias</h3>
+        <a href="#" style="color:var(--gold);font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;">Ver Coleção →</a>
+      </div>
+
+      <div class="cat-card text-center reveal delay-300">
+        <div class="cat-img-ring mb-4">
+          <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=300&q=80" alt="Blusas"/>
+        </div>
+        <h3 class="font-display" style="font-size:1.1rem;color:var(--ink);margin-bottom:4px;">Blusas</h3>
+        <a href="#" style="color:var(--gold);font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;">Ver Coleção →</a>
+      </div>
+
+      <div class="cat-card text-center reveal delay-400">
+        <div class="cat-img-ring mb-4">
+          <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=300&q=80" alt="Conjuntos"/>
+        </div>
+        <h3 class="font-display" style="font-size:1.1rem;color:var(--ink);margin-bottom:4px;">Conjuntos</h3>
+        <a href="#" style="color:var(--gold);font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;">Ver Coleção →</a>
+      </div>
+
+      <div class="cat-card text-center reveal delay-500">
+        <div class="cat-img-ring mb-4" style="background:linear-gradient(135deg,var(--blush-light),var(--linen));">
+          <div class="w-full h-full flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="color:var(--rose-muted)"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          </div>
+        </div>
+       
+    </div>
+  </div>
+</section> -->
+
+<!-- ═══════════════════════════════════════════════════
+     SOBRE A MARCA
+════════════════════════════════════════════════════ -->
+<section id="sobre" style="background:var(--linen);padding:80px 24px;">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Text -->
+      <div>
+        <p class="section-tag reveal">Nossa Essência</p>
+        <h2 class="font-display reveal delay-100" style="font-size:clamp(2rem,4vw,3.2rem);font-weight:300;line-height:1.2;color:var(--ink);margin-bottom:24px;">
+          Vista-se com Fé.<br/>
+          <em style="color:var(--rose-dark);">Viva com Propósito.</em>
+        </h2>
+        <div class="gold-line reveal delay-200 mb-6"></div>
+
+        <p class="reveal delay-300" style="color:var(--ink-soft);font-size:0.95rem;line-height:1.9;margin-bottom:16px;">
+          A Vestida para Adorar nasceu para vestir mulheres cristãs que desejam expressar sua fé através da modéstia, elegância e amor próprio.
+        </p>
+        <p class="reveal delay-400" style="color:var(--ink-soft);font-size:0.95rem;line-height:1.9;margin-bottom:32px;">
+          Aqui você encontra moda do tamanho 42 ao 50, além de acessórios, calçados, bijuterias e muito mais, tudo pensado para valorizar você em cada detalhe.
+        </p>
+
+        <!-- Feature list -->
+        <div class="space-y-4 mt-8 reveal delay-400">
+          <div class="vantagem-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" style="color:var(--rose-muted);flex-shrink:0;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span style="font-size:0.88rem;color:var(--ink);">Moda cristã com propósito em cada costura</span>
+          </div>
+          <div class="vantagem-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" style="color:var(--rose-muted);flex-shrink:0;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span style="font-size:0.88rem;color:var(--ink);">Qualidade e conforto do tecido ao acabamento</span>
+          </div>
+          <div class="vantagem-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" style="color:var(--rose-muted);flex-shrink:0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span style="font-size:0.88rem;color:var(--ink);">Atendimento humanizado e cuidado em cada detalhe</span>
+          </div>
+          <div class="vantagem-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" style="color:var(--rose-muted);flex-shrink:0;"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h5l2 3v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            <span style="font-size:0.88rem;color:var(--ink);">Envio rápido e seguro para todo o Brasil</span>
+          </div>
+        </div>
+
+        <div class="mt-10 reveal delay-500">
+          <a href="/Vestidos.html" class="btn-outline">Veja nossas peças →</a>
+        </div>
+      </div>
+
+      <!-- Brand Logo Circle -->
+      <div class="flex justify-center reveal-scale">
+        <div class="brand-logo-circle" style="width:260px;height:260px;">
+          <div class="text-center px-8">
+            <!-- TROQUE pelo logo/ilustração da marca -->
+            <img src="./img/Logo1.png" alt="Logo" style="width:260px;height:250px;"/>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     NOVIDADES / PRODUTOS
+════════════════════════════════════════════════════ -->
+<section id="novidades" style="background:var(--white);padding:80px 24px;">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+      <div>
+        <p class="section-tag reveal" style="text-align:left;">Nova Coleção</p>
+        <h2 class="font-display reveal delay-100" style="font-size:clamp(1.8rem,4vw,3rem);font-weight:300;color:var(--ink);">
+          Novidades para você<br/><em style="color:var(--rose-dark);">se apaixonar</em>
+          <svg xmlns="http://www.w3.org/2000/svg" class="inline ml-2" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="color:var(--rose-muted);vertical-align:text-bottom;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </h2>
+      </div>
+      <a href="/Vestidos.html" class="btn-outline flex-shrink-0 reveal delay-200">Ver Todas as Novidades →</a>
+    </div>
+
+    <div
+    id="produtos-destaque"
+    class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+    </div>
+
+    
+    <div class="text-center mt-12 reveal">
+      <a href="./Vestidos.html" class="btn-primary">Ver Toda a Coleção</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     VANTAGENS STRIP
+════════════════════════════════════════════════════ -->
+<section style="background:var(--linen-dark);padding:60px 24px;">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+
+      <div class="reveal delay-100 text-center" style="padding:20px;">
+        <div class="mx-auto mb-3 flex items-center justify-center w-12 h-12 rounded-full" style="background:var(--blush-light);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" style="color:var(--rose-muted)"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <h4 class="font-display" style="font-size:1.1rem;color:var(--ink);margin-bottom:4px;">Parcele em até</h4>
+        <p style="font-weight:700;font-size:1.2rem;color:var(--rose-dark);">6x Sem Juros</p>
+        <p style="font-size:0.75rem;color:var(--ink-soft);">no cartão</p>
+      </div>
+
+      <div class="reveal delay-200 text-center" style="padding:20px;">
+        <div class="mx-auto mb-3 flex items-center justify-center w-12 h-12 rounded-full" style="background:var(--blush-light);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" style="color:var(--rose-muted)"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h4 class="font-display" style="font-size:1.1rem;color:var(--ink);margin-bottom:4px;">5% de Desconto</h4>
+        <p style="font-weight:700;font-size:1.2rem;color:var(--rose-dark);">no Pix</p>
+        <p style="font-size:0.75rem;color:var(--ink-soft);">pagamento à vista</p>
+      </div>
+
+      <div class="reveal delay-300 text-center" style="padding:20px;">
+        <div class="mx-auto mb-3 flex items-center justify-center w-12 h-12 rounded-full" style="background:var(--blush-light);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" style="color:var(--rose-muted)"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
+        </div>
+        <h4 class="font-display" style="font-size:1.1rem;color:var(--ink);margin-bottom:4px;">Troca Garantida</h4>
+        <p style="font-weight:700;font-size:1.2rem;color:var(--rose-dark);">e Fácil</p>
+        <p style="font-size:0.75rem;color:var(--ink-soft);">sem burocracia</p>
+      </div>
+
+      <div class="reveal delay-400 text-center" style="padding:20px;">
+        <div class="mx-auto mb-3 flex items-center justify-center w-12 h-12 rounded-full" style="background:var(--blush-light);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" style="color:var(--rose-muted)"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h4 class="font-display" style="font-size:1.1rem;color:var(--ink);margin-bottom:4px;">Atendimento</h4>
+        <p style="font-weight:700;font-size:1.2rem;color:var(--rose-dark);">Humanizado</p>
+        <p style="font-size:0.75rem;color:var(--ink-soft);">com amor e cuidado</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     DEPOIMENTOS
+════════════════════════════════════════════════════ -->
+<section style="background:var(--white);padding:80px 24px;">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-14">
+      <p class="section-tag reveal">Depoimentos</p>
+      <h2 class="font-display reveal delay-100" style="font-size:clamp(1.8rem,4vw,3rem);font-weight:300;color:var(--ink);">
+        O que nossas clientes<br/><em style="color:var(--rose-dark);">dizem</em>
+        <svg xmlns="http://www.w3.org/2000/svg" class="inline ml-2" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="color:var(--rose-muted);vertical-align:text-bottom;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <div class="testimonial-card reveal delay-100">
+        <div class="stars mb-4">★★★★★</div>
+        <p style="color:var(--ink-soft);font-size:0.9rem;line-height:1.8;margin-bottom:20px;padding-top:24px;">
+          "Amei minhas peças! Tecido de qualidade, caimento perfeito e chegou tudo muito bem embalado. Me senti muito especial!"
+        </p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <!-- TROQUE pelas fotos reais das clientes -->
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=80&q=80" alt="Juliana S." style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--blush);"/>
+          <div>
+            <div class="font-display" style="font-size:1rem;color:var(--ink);font-weight:600;">Juliana S.</div>
+            <div style="font-size:0.72rem;color:var(--gold);">Cliente Verificada</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal delay-200">
+        <div class="stars mb-4">★★★★★</div>
+        <p style="color:var(--ink-soft);font-size:0.9rem;line-height:1.8;margin-bottom:20px;padding-top:24px;">
+          "Finalmente uma loja que pensa nas mulheres que usam tamanhos maiores com modéstia e elegância. Estou apaixonada!"
+        </p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&q=80" alt="Marcia L." style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--blush);"/>
+          <div>
+            <div class="font-display" style="font-size:1rem;color:var(--ink);font-weight:600;">Marcia L.</div>
+            <div style="font-size:0.72rem;color:var(--gold);">Cliente Verificada</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal delay-300">
+        <div class="stars mb-4">★★★★★</div>
+        <p style="color:var(--ink-soft);font-size:0.9rem;line-height:1.8;margin-bottom:20px;padding-top:24px;">
+          "Atendimento maravilhoso, entrega rápida e as roupas são ainda mais lindas ao vivo. Com certeza vou comprar mais vezes!"
+        </p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=80&q=80" alt="Fernanda A." style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--blush);"/>
+          <div>
+            <div class="font-display" style="font-size:1rem;color:var(--ink);font-weight:600;">Fernanda A.</div>
+            <div style="font-size:0.72rem;color:var(--gold);">Cliente Verificada</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     MARQUEE TRUST BAR
+════════════════════════════════════════════════════ -->
+<div style="background:var(--linen);padding:20px 0;border-top:1px solid var(--linen-dark);border-bottom:1px solid var(--linen-dark);">
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span style="color:var(--ink-soft);font-size:0.75rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;">✦ Moda com Fé</span>
+      <span style="color:var(--gold);font-size:0.75rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;">✦ Tamanhos 42 ao 50</span>
+      <span style="color:var(--ink-soft);font-size:0.75rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;">✦ Envio Brasil</span>
+      <span style="color:var(--gold);font-size:0.75rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;">✦ Modéstia e Elegância</span>
+      <span style="color:var(--ink-soft);font-size:0.75rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;">✦ Qualidade Premium</span>
+      <span style="color:var(--gold);font-size:0.75rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;">✦ Troca Garantida</span>
+      <span style="color:var(--ink-soft);font-size:0.75rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;">✦ Moda com Fé</span>
+      <span style="color:var(--gold);font-size:0.75rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;">✦ Tamanhos 42 ao 50</span>
+      <span style="color:var(--ink-soft);font-size:0.75rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;">✦ Envio Brasil</span>
+      <span style="color:var(--gold);font-size:0.75rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;">✦ Modéstia e Elegância</span>
+      <span style="color:var(--ink-soft);font-size:0.75rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;">✦ Qualidade Premium</span>
+      <span style="color:var(--gold);font-size:0.75rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;">✦ Troca Garantida</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     VERSÍCULO 2 — ANTES DA NEWSLETTER
+════════════════════════════════════════════════════ -->
+<div style="background:var(--linen-dark);padding:28px 24px;text-align:center;border-top:1px solid var(--linen-dark);border-bottom:1px solid rgba(201,169,110,0.2);">
+  <p class="reveal" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--ink-soft);margin:0;letter-spacing:0.02em;">
+    "A mulher temente ao Senhor é digna de louvor." — <span style="color:var(--gold);font-style:normal;font-size:0.78rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;">Provérbios 31:30</span>
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     NEWSLETTER
+════════════════════════════════════════════════════ -->
+<section id="contato" class="newsletter-section" style="padding:80px 24px;">
+  <div class="max-w-3xl mx-auto text-center relative z-10">
+    <p class="reveal" style="display:inline-block;color:rgba(255,255,255,0.75);font-size:0.72rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px;">— Fique por Dentro —</p>
+    <h2 class="font-display reveal delay-100" style="font-size:clamp(1.8rem,4vw,3rem);font-weight:300;color:white;margin-bottom:12px;">
+      Receba novidades e<br/><em>ofertas exclusivas!</em>
+    </h2>
+    <p class="reveal delay-200" style="color:rgba(255,255,255,0.7);font-size:0.9rem;line-height:1.7;margin-bottom:40px;">
+      Cadastre-se e fique por dentro das novidades da Vestida para Adorar.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto reveal delay-300">
+      <input type="mailto:m.vitordesoza033@gmail.com" class="newsletter-input flex-1" placeholder="Seu melhor e-mail" />
+      <button class="btn-newsletter">Quero Receber ♡</button>
+    </div>
+    <p class="reveal delay-400" style="color:rgba(255,255,255,0.45);font-size:0.72rem;margin-top:14px;">
+      Ao cadastrar, você concorda em receber nossas novidades.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════ -->
+<footer style="background:var(--ink);padding:60px 24px 0;">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-10" style="border-bottom:1px solid rgba(255,255,255,0.08);">
+
+      <!-- Brand -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.08);">
+            <svg viewBox="0 0 40 40" class="w-8 h-8" fill="none"><text x="50%" y="60%" font-family="Cormorant Garamond,serif" font-size="12" font-weight="600" fill="#c9a96e" text-anchor="middle">VpA</text></svg>
+          </div>
+          <div>
+            <div class="font-display" style="color:white;font-size:0.95rem;">Vestida para Adorar</div>
+          </div>
+        </div>
+        <p style="color:rgba(255,255,255,0.45);font-size:0.8rem;line-height:1.8;margin-bottom:20px;">
+          Moda feminina cristã do 42 ao 50, acessórios, calçados, bijuterias e muito mais.
+        </p>
+        <div style="display:flex;gap:10px;">
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="TikTok">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.79 1.52V6.72a4.85 4.85 0 0 1-1.02-.03z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Institucional -->
+      <div>
+        <h4 class="footer-heading">Institucional</h4>
+        <a class="footer-link" href="#">Sobre Nós</a>
+        <a class="footer-link" href="#">Nossa Missão</a>
+        <a class="footer-link" href="#">Trocas e Devoluções</a>
+        <a class="footer-link" href="#">Perguntas Frequentes</a>
+        <a class="footer-link" href="#">Política de Privacidade</a>
+        <a class="footer-link" href="#">Termos de Uso</a>
+      </div>
+
+      <!-- Ajuda -->
+      <div>
+        <h4 class="footer-heading">Ajuda</h4>
+        <a class="footer-link" href="#">Como Comprar</a>
+        <a class="footer-link" href="#">Formas de Pagamento</a>
+        <a class="footer-link" href="#">Prazos e Entregas</a>
+        <a class="footer-link" href="#">Trocas e Devoluções</a>
+        <a class="footer-link" href="#">Fale Conosco</a>
+      </div>
+
+      <!-- Pagamento -->
+      <div>
+        <h4 class="footer-heading">Formas de Pagamento</h4>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;">
+          <span class="payment-badge">VISA</span>
+          <span class="payment-badge">MASTER</span>
+          <span class="payment-badge">PIX</span>
+          <span class="payment-badge">BOLETO</span>
+          <span class="payment-badge">ELO</span>
+        </div>
+        <h4 class="footer-heading" style="margin-top:16px;">Segurança</h4>
+        <div style="display:flex;align-items:center;gap:10px;color:rgba(255,255,255,0.5);font-size:0.8rem;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" style="color:var(--gold);flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Loja 100% segura e seus dados protegidos</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="padding:24px 0;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;">
+      <p style="color:rgba(255,255,255,0.3);font-size:0.75rem;">© 2026 Vestida para Adorar. Todos os direitos reservados.</p>
+      <p style="color:rgba(255,255,255,0.2);font-size:0.72rem;">Desenvolvido por Vitor Melo e com ❤️</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════
+     WHATSAPP BUTTON
+════════════════════════════════════════════════════ -->
+<!-- TROQUE o número pelo seu WhatsApp real -->
+<a id="wa-btn" href="https://wa.me/556796317690?text=Olá!%20Quero%20saber%20mais%20sobre%20a%20Vestida%20para%20Adorar%20🌸" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <span id="wa-tooltip">Fale Conosco!</span>
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+  </svg>
+</a>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="./js/config.js"></script>
+
+<script src="./js/carrinho.js"></script>
+
+<script src="./js/index.js"></script>
+
+<script src="./js/js.js"></script>
+
+
+
+</body>
+</html>
