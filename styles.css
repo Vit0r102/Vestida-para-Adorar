@@ -26,8 +26,6 @@
       --ink:          #3a2e2c;
       --ink-soft:     #6b5753;
       --white:        #fffcfa;
-      --dark-salmon:  #CD5C5C;
-      --transparent:   transparent;
     }
 
     /* ═══════════════════════════════
@@ -363,7 +361,7 @@
     /* ── Category card ring glow on hover (enhanced) ── */
     .cat-card:hover .cat-img-ring {
       box-shadow: 0 0 0 4px rgba(201,169,110,0.2), 0 12px 40px rgba(201,169,110,0.3);
-      border-color: var(--blush-deep)
+      border-image: linear-gradient(135deg, var(--gold), var(--blush-deep)) 1;
     }
 
     /* ── Nav link active indicator dot ── */
@@ -578,7 +576,7 @@
       gap: 8px;
       padding: 12px 28px;
       background: transparent;
-      color: var(--gold);
+      color: var(--rose-dark);
       font-family: 'Jost', sans-serif;
       font-size: 0.78rem;
       font-weight: 600;
@@ -671,7 +669,7 @@
       overflow: hidden;
       border: 3px solid transparent;
       background: linear-gradient(white,white) padding-box,
-      linear-gradient(135deg, var(--gold-light), var(--blush-deep)) border-box;
+                  linear-gradient(135deg, var(--gold-light), var(--blush-deep)) border-box;
       transition: box-shadow 0.4s;
       margin: 0 auto;
     }
@@ -695,7 +693,6 @@
       transition: transform 0.4s cubic-bezier(.22,1,.36,1), box-shadow 0.4s;
       border: 1px solid rgba(240,200,192,0.3);
       cursor: pointer;
-      border: 1.5px solid var(--gold-light);
     }
     .product-card:hover {
       transform: translateY(-8px);
@@ -715,13 +712,12 @@
     .product-overlay {
       position: absolute;
       inset: 0;
-      background: transparent;
+      background: linear-gradient(to top, rgba(58,46,44,0.4) 0%, transparent 50%);
       opacity: 0;
       transition: opacity 0.4s;
       display: flex;
       align-items: flex-end;
       padding: 20px;
-      border-color:#CD5C5C;
     }
     .product-card:hover .product-overlay { opacity: 1; }
     .product-badge {
@@ -736,77 +732,22 @@
       border-radius: 20px;
       text-transform: uppercase;
     }
-
-/* =========================
-   FAVORITOS
-========================= */
-
-.product-wishlist{
-    position:absolute;
-    top:12px;
-    right:12px;
-
-    width:38px;
-    height:38px;
-
-    background:white;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    box-shadow:0 2px 10px rgba(0,0,0,.10);
-
-    cursor:pointer;
-
-    transition:all .3s ease;
-}
-
-.product-wishlist:hover{
-    transform:scale(1.15);
-}
-
-.product-wishlist svg{
-    color:var(--rose-muted);
-    transition:all .3s ease;
-}
-
-.product-wishlist.active{
-    color:var(--rose-dark);
-}
-
-.product-wishlist.active svg{
-    color:#c53f57;
-    transform:scale(1.2);
-}
-
-.product-wishlist.animate{
-    animation:heartPop .45s ease;
-}
-
-@keyframes heartPop{
-
-    0%{
-        transform:scale(1);
+    .product-wishlist {
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 34px; height: 34px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
     }
-
-    40%{
-        transform:scale(1.5);
-    }
-
-    60%{
-        transform:scale(1.15);
-    }
-
-    100%{
-        transform:scale(1);
-    }
-
-}
-
-/* Hover Desktop */
+    .product-wishlist:hover { transform: scale(1.15); background: var(--blush-light); }
+    .product-wishlist svg { transition: fill 0.3s; }
+    .product-wishlist.active svg { fill: var(--rose-muted); }
 
     /* ═══════════════════════════════
        BENEFIT CARDS
@@ -1023,17 +964,17 @@
     }
 
     /* ═══════════════════════════════
-       WHATSAPP 
+       WHATSAPP BUTTON
     ═══════════════════════════════ */
     #wa-btn {
       position: fixed;
       bottom: 28px; right: 24px;
       z-index: 9999;
       width: 58px; height: 58px;
-      background: #77344b;
+      background: #25D366;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 10px 20px rgba(223, 29, 29, 0.644);
+      box-shadow: 0 6px 24px rgba(37,211,102,0.4);
       cursor: pointer;
       text-decoration: none;
       transition: transform 0.3s, box-shadow 0.3s;
@@ -1041,7 +982,7 @@
     }
     #wa-btn:hover {
       transform: scale(1.1);
-      box-shadow:0 10px 35px rgba(223, 29, 29, 0.644);
+      box-shadow: 0 10px 32px rgba(37,211,102,0.55);
       animation: none;
     }
     #wa-tooltip {
@@ -1136,40 +1077,207 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* Gradientes */
-    .gradient-bg {
-      background: linear-gradient(-135deg, var(--blush) 30%, var(--dark-salmon) 100%);
-    }
+    
+    /* ═══════════════════════════════════════
+       CARRINHO — ANIMAÇÕES & UX
+    ═══════════════════════════════════════ */
+
+    /* Fundo suave da seção */
     .gradient-cr {
-      background: linear-gradient(-135deg, var(--blush) 30%, var(--blush-deep) 100%);
+      background: linear-gradient(160deg, var(--linen) 0%, var(--blush-light) 60%, var(--linen-dark) 100%);
+      background-size: 200% 200%;
+      animation: gradientDrift 12s ease infinite;
     }
 
-    .cart-wrapper{
-    position:relative;
-    display:inline-flex;
-}
+    /* Card de produto no carrinho — entrada */
+    @keyframes cartCardIn {
+      from { opacity: 0; transform: translateY(22px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0)   scale(1);    }
+    }
+    .cart-item-card {
+      animation: cartCardIn 0.5s cubic-bezier(.22,1,.36,1) both;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.3s;
+      border-radius: 30px;
+      background: white;
+    }
+    .cart-item-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(58,46,44,0.10);
+    }
+    .cart-item-card::after {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+      transform: skewX(-20deg);
+      pointer-events: none;
+    }
+    .cart-item-card:hover::after {
+      animation: cardShimmerV 0.65s ease forwards;
+    }
 
-#contador-carrinho{
+    /* Botões +/- do carrinho */
+    .qty-btn {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--linen-dark);
+      border: 1.5px solid rgba(201,169,110,0.3);
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--ink);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      flex-shrink: 0;
+    }
+    .qty-btn:hover  { background: var(--blush); border-color: var(--rose-muted); transform: scale(1.12); }
+    .qty-btn:active { transform: scale(0.92); }
 
-    position:absolute;
+    .qty-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; font-weight: 600;
+      color: var(--ink);
+      min-width: 24px; text-align: center;
+      transition: transform 0.2s;
+    }
+    .qty-value.bump { animation: qtyBump 0.3s cubic-bezier(.22,1,.36,1); }
+    @keyframes qtyBump {
+      0%  { transform: scale(1); }
+      50% { transform: scale(1.45); }
+      100%{ transform: scale(1); }
+    }
 
-    top:-8px;
-    right:-8px;
+    /* Botão remover */
+    .btn-remover {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: transparent;
+      border: 1.5px solid rgba(160,90,82,0.3);
+      color: var(--rose-dark);
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 7px 14px; border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.25s, border-color 0.25s, transform 0.2s;
+      margin-top: 10px;
+    }
+    .btn-remover:hover  { background: var(--rose-dark); border-color: var(--rose-dark); color: white; transform: scale(1.04); }
+    .btn-remover:active { transform: scale(0.96); }
 
-    min-width:18px;
-    height:18px;
+    /* Saída suave ao remover */
+    .cart-item-card.removing {
+      animation: cartCardOut 0.4s cubic-bezier(.22,1,.36,1) forwards;
+      pointer-events: none;
+    }
+    @keyframes cartCardOut {
+      from { opacity: 1; transform: scale(1) translateY(0); }
+      to   { opacity: 0; transform: scale(0.93) translateY(-10px); }
+    }
 
-    padding:0 5px;
+    /* Resumo do pedido */
+    .resumo-card {
+      background: white;
+      border-radius: 20px;
+      padding: 28px 24px;
+      border: 1px solid rgba(201,169,110,0.2);
+      box-shadow: 0 8px 32px rgba(58,46,44,0.06);
+      animation: cartCardIn 0.6s 0.2s cubic-bezier(.22,1,.36,1) both;
+    }
+    .resumo-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 400;
+      color: var(--ink); margin-bottom: 8px;
+    }
+    .resumo-total {
+      font-size: 1.6rem; font-weight: 300;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--rose-dark); margin-bottom: 20px;
+    }
+    .resumo-divider {
+      height: 1px;
+      background: linear-gradient(to right, var(--gold), transparent);
+      margin: 14px 0;
+      width: 0;
+      animation: resumoDivider 1s 0.5s ease forwards;
+    }
+    @keyframes resumoDivider { from { width:0; } to { width:100%; } }
 
-    border-radius:50%;
+    /* Botão finalizar WhatsApp */
+    .btn-whatsapp-finalizar {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%;
+      background: linear-gradient(135deg, #25d366 0%, #128c54 100%);
+      color: white;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.88rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 14px 20px; border-radius: 50px;
+      border: none; cursor: pointer;
+      box-shadow: 0 6px 20px rgba(37,211,102,0.30);
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: softPulseWa 3s ease-in-out infinite;
+    }
+    .btn-whatsapp-finalizar:hover  { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,211,102,0.40); animation: none; }
+    .btn-whatsapp-finalizar:active { transform: scale(0.97); }
+    @keyframes softPulseWa {
+      0%,100%{ box-shadow: 0 6px 20px rgba(37,211,102,0.28); }
+      60%    { box-shadow: 0 6px 30px rgba(37,211,102,0.48); }
+    }
 
-    background:var(--rose-dark);
-    color:white;
+    /* Estado carrinho vazio */
+    .carrinho-vazio {
+      grid-column: 1 / -1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 80px 24px; text-align: center;
+      animation: cartCardIn 0.7s cubic-bezier(.22,1,.36,1) both;
+    }
+    .carrinho-vazio-icon { font-size: 4rem; margin-bottom: 20px; animation: gentleBob 4s ease-in-out infinite; }
+    .carrinho-vazio h3  { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; color:var(--ink); margin-bottom:10px; }
+    .carrinho-vazio p   { color:var(--ink-soft); font-size:0.9rem; margin-bottom:28px; line-height:1.7; }
 
-    font-size:11px;
-    font-weight:bold;
+    /* Toast */
+    #cart-toast {
+      position: fixed; bottom: 90px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--ink); color: white;
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em;
+      padding: 12px 22px; border-radius: 50px;
+      white-space: nowrap;
+      box-shadow: 0 8px 24px rgba(58,46,44,0.25);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s, transform 0.35s;
+      z-index: 9999;
+    }
+    #cart-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
+    /* Skeleton loader */
+    .skeleton {
+      background: linear-gradient(90deg, var(--linen) 25%, var(--linen-dark) 50%, var(--linen) 75%);
+      background-size: 200% 100%;
+      animation: skeletonWave 1.4s ease infinite;
+      border-radius: 12px;
+    }
+    @keyframes skeletonWave { from{background-position:200% 0;} to{background-position:-200% 0;} }
+    .skeleton-card { border-radius:30px; overflow:hidden; background:white; box-shadow:0 4px 16px rgba(58,46,44,0.05); }
+    .skeleton-img  { width:100%; height:220px; }
+    .skeleton-line { height:14px; margin:12px 16px; }
+    .skeleton-line.short { width:60%; }
+    .skeleton-line.price { width:40%; height:18px; }
+
+    /* Back to top — carrinho */
+    #back-to-top-cr {
+      position:fixed; bottom:100px; right:24px; z-index:9998;
+      width:44px; height:44px;
+      background:white; border:1.5px solid rgba(201,169,110,0.4);
+      border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 16px rgba(58,46,44,0.10);
+      cursor:pointer; color:var(--gold);
+      opacity:0; transform:translateY(12px);
+      transition:opacity 0.4s, transform 0.4s, box-shadow 0.3s;
+      text-decoration:none;
+    }
+    #back-to-top-cr.visible { opacity:1; transform:translateY(0); }
+    #back-to-top-cr:hover   { box-shadow:0 8px 24px rgba(201,169,110,0.3); transform:translateY(-2px); }
+
