@@ -26,6 +26,7 @@
       --ink:          #3a2e2c;
       --ink-soft:     #6b5753;
       --white:        #fffcfa;
+      --dark-salmon:  #e9967a;
     }
 
     /* ═══════════════════════════════
@@ -1089,6 +1090,9 @@
       animation: gradientDrift 12s ease infinite;
     }
 
+     .gradient-bg {
+      background: linear-gradient(-135deg, var(--blush) 30%, var(--dark-salmon) 100%);}
+
     /* Card de produto no carrinho — entrada */
     @keyframes cartCardIn {
       from { opacity: 0; transform: translateY(22px) scale(0.97); }
@@ -1280,4 +1284,3 @@
     }
     #back-to-top-cr.visible { opacity:1; transform:translateY(0); }
     #back-to-top-cr:hover   { box-shadow:0 8px 24px rgba(201,169,110,0.3); transform:translateY(-2px); }
-
