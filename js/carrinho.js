@@ -299,12 +299,63 @@ function removerProduto(produtoId){
     carregarCarrinho();
     atualizarContadorCarrinho();
 }
+//-----------------------------------
+//  FUNÇÃO DE VERIFICAÇÃO DE ESTOQUE
+//-----------------------------------
+
+    async function verificarEstoqueCarrinho() {
+
+    const carrinho =
+    JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    for (const item of carrinho) {
+
+        const { data, error } =
+        await supabaseClient
+            .from("Produtos")
+            .select("nome, estoque")
+            .eq("id", item.id)
+            .single();
+
+        if (error) {
+
+            console.error(error);
+            return false;
+
+        }
+
+        if (item.quantidade > data.estoque) {
+
+            alert(
+                `O produto "${data.nome}" possui apenas ${data.estoque} unidade(s) disponível(is).`
+            );
+
+            return false;
+
+        }
+
+    }
+
+    return true;
+
+}
+
 
 //-----------------------------------
 //        FUNÇÃO WHATSAPP
 //-----------------------------------
 
+
 async function finalizarWhatsapp(){
+
+    const estoqueOk =
+await verificarEstoqueCarrinho();
+
+if(!estoqueOk){
+
+    return;
+
+}
 
     const carrinho =
     JSON.parse(localStorage.getItem('carrinho')) || [];

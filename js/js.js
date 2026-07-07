@@ -44,7 +44,7 @@
 
   /* ─── Floating Petals ─── */
   const petalContainer = document.getElementById('petals');
-  const petalEmojis = ['🌸', '✿', '❀', '🌼', '✦'];
+  const petalEmojis = ['🌸', '✿', '❀', '🌼', '✦','❤️'];
   function spawnPetal() {
     const p = document.createElement('div');
     p.className = 'petal';
@@ -88,11 +88,11 @@
 
   /* ─── Top Bar Message Rotation ─── */
   const topBarMsgs = [
-    '✦ Vista-se para Adorar',
-    '✦ Frete para todo o Brasil',
-    '✦ Tamanhos 42 ao 50 — Para Cada Corpo',
-    '✦ Moda que Honra a Deus',
-    '✦ 5% de Desconto no Pix ✦',
+    '✦ Vista-se para Adorar ✦',
+    '✦ Entregamos com taxa ✦',
+    '✦ Tamanhos 42 ao 50 ✦',
+    '✦ Moda que Honra a Deus ✦',
+    '✦ Aceitamos Pix ✦',
   ];
   let tbIdx = 0;
   const tbEl = document.getElementById('top-bar-msg');
