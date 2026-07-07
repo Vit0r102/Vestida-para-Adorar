@@ -299,6 +299,17 @@ function removerProduto(produtoId){
     carregarCarrinho();
     atualizarContadorCarrinho();
 }
+
+
+    function limparCarrinho(){
+
+    localStorage.removeItem("carrinho");
+
+    carregarCarrinho();
+
+    atualizarContadorCarrinho();
+    }
+
 //-----------------------------------
 //  FUNÇÃO DE VERIFICAÇÃO DE ESTOQUE
 //-----------------------------------
@@ -396,6 +407,12 @@ if(!estoqueOk){
         `https://wa.me/556796317690?text=${mensagem}`,
         '_blank'
     );
+
+    setTimeout(() => {
+
+    limparCarrinho();
+
+    },1000);
 }
 // ============================================================
 //   ANIMAÇÕES    
