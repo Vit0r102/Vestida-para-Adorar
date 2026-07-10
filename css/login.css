@@ -1,0 +1,223 @@
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blush:       #f0c8c0;
+      --blush-light: #fdf0ee;
+      --blush-deep:  #d4897a;
+      --rose-muted:  #c9837a;
+      --rose-dark:   #a05a52;
+      --gold:        #c9a96e;
+      --gold-light:  #e8d5b0;
+      --linen:       #f7f0e8;
+      --linen-dark:  #ede4d8;
+      --ink:         #3a2e2c;
+      --ink-soft:    #6b5753;
+    }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--linen);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Fundo decorativo */
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+      opacity: 0.35;
+    }
+    .bg-orb-1 { width: 500px; height: 500px; background: var(--blush); top: -100px; right: -100px; }
+    .bg-orb-2 { width: 400px; height: 400px; background: var(--gold-light); bottom: -80px; left: -80px; }
+
+    /* Cruz decorativa de fundo */
+    .bg-cross {
+      position: fixed;
+      font-size: 28rem;
+      color: var(--blush);
+      opacity: 0.07;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      font-family: serif;
+      line-height: 1;
+      animation: crossPulse 8s ease-in-out infinite;
+    }
+    @keyframes crossPulse {
+      0%, 100% { opacity: 0.05; transform: translate(-50%, -50%) scale(1); }
+      50%       { opacity: 0.10; transform: translate(-50%, -50%) scale(1.04); }
+    }
+
+    /* Card de login */
+    .login-card {
+      position: relative;
+      z-index: 10;
+      background: white;
+      border-radius: 28px;
+      padding: 52px 48px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 24px 80px rgba(58,46,44,0.12), 0 4px 16px rgba(58,46,44,0.06);
+      animation: cardIn 0.6s cubic-bezier(.22,1,.36,1) both;
+      border: 1px solid rgba(201,169,110,0.15);
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(24px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Logo / topo */
+    .login-brand {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .login-brand-icon {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--blush-light);
+      border: 2px solid var(--gold-light);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 1.6rem;
+    }
+    .login-brand h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.6rem;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+    .login-brand h1 em {
+      font-style: italic;
+      color: var(--rose-muted);
+    }
+    .login-brand p {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-top: 6px;
+      opacity: 0.7;
+    }
+
+    /* Divisor dourado */
+    .gold-line {
+      width: 40px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0 auto 32px;
+      animation: goldExpand 1s 0.4s ease forwards;
+      transform-origin: center;
+      transform: scaleX(0);
+    }
+    @keyframes goldExpand { to { transform: scaleX(1); } }
+
+    /* Campos */
+    .field {
+      margin-bottom: 18px;
+    }
+    .field label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 7px;
+    }
+    .field input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--linen-dark);
+      border-radius: 12px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.92rem;
+      color: var(--ink);
+      background: var(--linen);
+      transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+      outline: none;
+    }
+    .field input:focus {
+      border-color: var(--gold);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(201,169,110,0.12);
+    }
+    .field input.error {
+      border-color: var(--rose-muted);
+      background: #fdf0ee;
+    }
+
+    /* Mensagem de erro */
+    .error-msg {
+      font-size: 0.75rem;
+      color: var(--rose-dark);
+      margin-top: 6px;
+      display: none;
+      animation: shakeX 0.4s ease;
+    }
+    .error-msg.show { display: block; }
+    @keyframes shakeX {
+      0%, 100% { transform: translateX(0); }
+      20%, 60%  { transform: translateX(-6px); }
+      40%, 80%  { transform: translateX(6px); }
+    }
+
+    /* Botão entrar */
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--rose-dark), var(--rose-muted));
+      color: white;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 8px;
+      box-shadow: 0 6px 20px rgba(160,90,82,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-login:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(160,90,82,0.38); }
+    .btn-login:active { transform: scale(0.97); }
+    .btn-login.loading { opacity: 0.75; pointer-events: none; }
+
+    /* Rodapé do card */
+    .login-footer {
+      text-align: center;
+      margin-top: 28px;
+      font-size: 0.72rem;
+      color: var(--ink-soft);
+      opacity: 0.6;
+      line-height: 1.6;
+    }
+    .login-footer a {
+      color: var(--rose-dark);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Versículo */
+    .verse {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      opacity: 0.55;
+      line-height: 1.7;
+      animation: cardIn 0.8s 0.3s cubic-bezier(.22,1,.36,1) both;
+    }
+
+    @media (max-width: 480px) {
+      .login-card { padding: 40px 28px; margin: 16px; }
+    }

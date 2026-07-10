@@ -32,6 +32,7 @@ function atualizarContadorCarrinho(){
     }
 
 }
+
 // =============================
 // CARRINHO
 // =============================

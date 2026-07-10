@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vestida para Adorar — Acesso Administrativo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/login.css"/>
+</head>
+<body>
+
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-cross">✝</div>
+
+  <div>
+    <div class="login-card">
+
+      <div class="login-brand">
+        <div class="login-brand-icon">✝</div>
+        <h1>Vestida para <em>Adorar</em></h1>
+        <p>Painel Administrativo</p>
+      </div>
+
+      <div class="gold-line"></div>
+
+      <div class="field">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" placeholder="admin@vestidaparaadorar.com.br" autocomplete="email"/>
+        <div class="error-msg" id="email-error">Digite um e-mail válido.</div>
+      </div>
+
+      <div class="field">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" placeholder="••••••••" autocomplete="current-password"/>
+        <div class="error-msg" id="senha-error">A senha deve ter pelo menos 6 caracteres.</div>
+      </div>
+
+      <div class="error-msg show" id="login-error" style="text-align:center;margin-bottom:12px;display:none;"></div>
+
+      <button class="btn-login" id="btn-login" onclick="fazerLogin()">
+        Entrar no Painel
+      </button>
+
+      <div class="login-footer">
+        <a href="../front/index.html">← Voltar ao site</a>
+      </div>
+
+    </div>
+
+    <p class="verse">"Tudo o que fizerem, façam de todo o coração."<br/>— Colossenses 3:23</p>
+  </div>
+
+  <script src ="../js/login.js"></script>
+
+</body>
+</html>

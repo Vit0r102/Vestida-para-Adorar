@@ -1,51 +1,3 @@
-// ==============================
-//    FAVORITOS
-// ==============================
-
-// ── Adicionar / Remover dos favoritos ─────────────────────
-function toggleFavorito(produtoId) {
-
-    let favoritos =
-    JSON.parse(localStorage.getItem('favoritos')) || [];
-
-    const existe =
-    favoritos.includes(produtoId);
-
-    if (existe) {
-
-        favoritos =
-        favoritos.filter(id => id !== produtoId);
-
-    } else {
-
-        favoritos.push(produtoId);
-
-    }
-
-    localStorage.setItem(
-        'favoritos',
-        JSON.stringify(favoritos)
-    );
-
-    atualizarContadorFavoritos();
-
-    return !existe; // true = foi adicionado, false = foi removido
-}
-
-window.toggleFavorito = toggleFavorito;
-
-// ── Verificar se produto está nos favoritos ───────────────
-function ehFavorito(produtoId) {
-
-    const favoritos =
-    JSON.parse(localStorage.getItem('favoritos')) || [];
-
-    return favoritos.includes(produtoId);
-
-}
-
-window.ehFavorito = ehFavorito;
-
 // ── Atualizar contador de favoritos na navbar ─────────────
 function atualizarContadorFavoritos() {
 
@@ -62,14 +14,14 @@ function atualizarContadorFavoritos() {
 
         textoContador.textContent =
         totalFavoritos === 1
-            ? '1 peça salva'
+            ? `1 peça salva`
             : `${totalFavoritos} peças salvas`;
 
     }
 
     // Badge na navbar (caso exista)
     const badge =
-    document.getElementById('contador-favoritos-badge');
+    document.getElementById('contador-favoritos');
 
     if (!badge) return;
 
@@ -687,3 +639,5 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(favAplicarAnimacoes, 700);
 
 });
+carregarFavoritos();
+atualizarContadorFavoritos();

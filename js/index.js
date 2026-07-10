@@ -21,7 +21,7 @@ async function carregarDestaques(){
 // =============================
 
 let favoritos =
-JSON.parse(localStorage.getItem('favoritos')) || [];
+(JSON.parse(localStorage.getItem('favoritos')) || []).map(Number);
 
 function toggleWish(event, btn, produtoId){
 
@@ -33,11 +33,16 @@ function toggleWish(event, btn, produtoId){
         btn.classList.remove('animate');
     }, 450);
 
-    const index = favoritos.indexOf(produtoId);
+    const id = Number(produtoId);
+
+    favoritos =
+    (JSON.parse(localStorage.getItem('favoritos')) || []).map(Number);
+
+    const index = favoritos.indexOf(id);
 
     if(index === -1){
 
-        favoritos.push(produtoId);
+        favoritos.push(id);
         btn.classList.add('active');
 
     }else{
@@ -51,6 +56,10 @@ function toggleWish(event, btn, produtoId){
         'favoritos',
         JSON.stringify(favoritos)
     );
+
+    if (typeof atualizarContadorFavoritos === 'function') {
+        atualizarContadorFavoritos();
+    }
 }
 
 window.toggleWish = toggleWish;
@@ -69,7 +78,7 @@ function mostrarDestaques(produtos){
     produtos.forEach(produto => {
 
         const favorito =
-        favoritos.includes(produto.id);
+        favoritos.includes(Number(produto.id));
 
         let badge = '';
 

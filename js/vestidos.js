@@ -1,58 +1,42 @@
-async function carregarProdutos(){
-
-    const { data, error } =
-    await supabaseClient
-        .from('Produtos')
-        .select('*')
-        .eq('ativo', true);
-
-    if(error){
-        console.error(error);
-        return;
-    }
-
-    mostrarProdutos(data);
-}
-
 //=============================
 // FAVORITOS
 //=============================
 
+// Normaliza sempre como Number para evitar conflito de tipos com localStorage
 let favoritos =
-JSON.parse(localStorage.getItem('favoritos')) || [];
+(JSON.parse(localStorage.getItem('favoritos')) || []).map(Number);
 
 function toggleWish(event, btn, produtoId){
 
     event.stopPropagation();
 
-    btn.classList.add('animate');
+    // Garante que o id comparado é sempre Number
+    const id = Number(produtoId);
 
-    setTimeout(() => {
-        btn.classList.remove('animate');
-    }, 450);
+    favoritos =
+    (JSON.parse(localStorage.getItem('favoritos')) || []).map(Number);
 
-    const index = favoritos.indexOf(produtoId);
+    const index = favoritos.indexOf(id);
 
     if(index === -1){
 
-        favoritos.push(produtoId);
-        btn.classList.add('active');
+        favoritos.push(id);
+        btn.classList.add("active");
 
     }else{
 
         favoritos.splice(index, 1);
-        btn.classList.remove('active');
+        btn.classList.remove("active");
 
     }
 
     localStorage.setItem(
-        'favoritos',
+        "favoritos",
         JSON.stringify(favoritos)
     );
+
+    atualizarContadorFavoritos();
 }
-
-window.toggleWish = toggleWish;
-
 //=============================
 // PRODUTOS
 //=============================
@@ -82,8 +66,11 @@ function mostrarProdutos(produtos){
 
     produtos.forEach(produto => {
 
+          console.log(produto.id, typeof produto.id);
+
+
         const favorito =
-        favoritos.includes(produto.id);
+        favoritos.includes(Number(produto.id));
 
          let badge = '';
 

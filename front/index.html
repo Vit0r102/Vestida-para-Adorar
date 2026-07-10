@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="../css/styles.css"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -72,10 +72,9 @@
     <ul class="hidden lg:flex items-center gap-8">
       <li><a href="#inicio" class="nav-link">Início</a></li>
       <li><a href="./Vestidos.html" class="nav-link">Loja</a></li>
-      <li><a href="#novidades" class="nav-link">Novidades</a></li>
-      <li><a href="#sobre" class="nav-link">Sobre Nós</a></li>
-      <li><a href="#contato" class="nav-link">Contato</a></li>
-      <li><a href="#Ajuda" class="nav-link">Ajuda</a></li>
+      <li><a href="./admin-dashboard.html" class="nav-link">Novidades</a></li>
+      <li><a href="./admin-login.html" class="nav-link">Sobre Nós</a></li>
+      <li><a href="https://wa.me/556796317690?text=Olá!%20Quero%20saber%20mais%20sobre%20a%20Vestida%20para%20Adorar"class="nav-link">Contato</a></li>
     </ul>
 
     <!-- Icons -->
@@ -112,10 +111,10 @@
       <li><a href="./Vestidos.html" class="block py-3 font-display text-xl" style="color:var(--ink);border-bottom:1px solid var(--linen-dark);" onclick="toggleMenu()">Loja</a></li>
       <li><a href="#novidades" class="block py-3 font-display text-xl" style="color:var(--ink);border-bottom:1px solid var(--linen-dark);" onclick="toggleMenu()">Novidades</a></li>
       <li><a href="#sobre" class="block py-3 font-display text-xl" style="color:var(--ink);border-bottom:1px solid var(--linen-dark);" onclick="toggleMenu()">Sobre Nós</a></li>
-      <li><a href="#contato" class="block py-3 font-display text-xl" style="color:var(--ink);" onclick="toggleMenu()">Contato</a></li>
+      <li><a href="https://wa.me/556796317690?text=Olá!%20Quero%20saber%20mais%20sobre%20a%20Vestida%20para%20Adorar" class="block py-3 font-display text-xl" style="color:var(--ink);" onclick="toggleMenu()">Contato</a></li>
     </ul>
     <div class="mt-8">
-      <a href="https://wa.me/5500000000000" class="btn-primary w-full justify-center">Fale Conosco</a>
+      <a href="https://wa.me/556796317690" class="btn-primary w-full justify-center">Fale Conosco</a>
     </div>
   </div>
   <div class="flex-1 bg-black/30 backdrop-blur-sm" onclick="toggleMenu()"></div>
@@ -230,7 +229,7 @@
 
 
 <!-- ═══════════════════════════════════════════════════
-     CATEGORIES
+     CATEGORIES (Quando vendar mais que apenas roupas)
 ════════════════════════════════════════════════════ -->
 <!--<section id="loja" style="background:var(--white);padding:80px 24px;">
   <div class="max-w-7xl mx-auto">
@@ -524,8 +523,8 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════════
-     NEWSLETTER
-════════════════════════════════════════════════════ -->
+     NEWSLETTER Para futuras adições, caso queira ativar a newsletter, basta remover os comentários do código abaixo. (Uso para receber e-mails de clientes interessados em novidade e ofertas)
+════════════════════════════════════════════════════ 
 <section id="contato" class="newsletter-section" style="padding:80px 24px;">
   <div class="max-w-3xl mx-auto text-center relative z-10">
     <p class="reveal" style="display:inline-block;color:rgba(255,255,255,0.75);font-size:0.72rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px;">— Fique por Dentro —</p>
@@ -543,7 +542,7 @@
       Ao cadastrar, você concorda em receber nossas novidades.
     </p>
   </div>
-</section>
+</section> -->
 
 <!-- ═══════════════════════════════════════════════════
      FOOTER
@@ -644,13 +643,13 @@
 ════════════════════════════════════════════════════ -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="./js/config.js"></script>
+<script src="../js/config.js"></script>
 
-<script src="./js/carrinho.js"></script>
+<script src="../js/carrinho.js"></script>
 
-<script src="./js/index.js"></script>
+<script src="../js/index.js"></script>
 
-<script src="./js/js.js"></script>
+<script src="../js/js.js"></script>
 
 
 
