@@ -219,5 +219,15 @@
     }
 
     @media (max-width: 480px) {
-      .login-card { padding: 40px 28px; margin: 16px; }
+      body { align-items: flex-start; padding: 24px 0 40px; overflow-y: auto; }
+      .login-card { padding: 36px 24px; margin: 0 16px; border-radius: 20px; }
+      .login-brand h1 { font-size: 1.35rem; }
+      .login-brand-icon { width: 54px; height: 54px; font-size: 1.3rem; }
+      .field input { font-size: 16px; /* previne zoom automático no iOS */ padding: 14px 16px; }
+      .btn-login { padding: 15px; font-size: 0.85rem; }
+      .bg-cross { font-size: 16rem; }
+      .bg-orb-1 { width: 280px; height: 280px; }
+      .bg-orb-2 { width: 220px; height: 220px; }
+      .verse { font-size: 0.78rem; margin: 20px 16px 0; }
     }
+  

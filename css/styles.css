@@ -498,7 +498,7 @@
     overflow: hidden;
     min-height: 100vh;
 
-    background-image: url("./img/Fundo3.png");
+    background-image: url("../front/img/Fundo3.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -509,7 +509,7 @@
     overflow: hidden;
     min-height: 100vh;
 
-    background-image: url("./img/fundo-flores3.png");
+    background-image: url("../front/img/fundo-flores3.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

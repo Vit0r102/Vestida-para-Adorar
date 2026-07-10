@@ -22,6 +22,7 @@
       color: var(--ink);
       min-height: 100vh;
       display: flex;
+      overflow-x: hidden;
     }
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: var(--linen); }
@@ -157,6 +158,8 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      min-width: 0;
+      overflow-x: hidden;
     }
 
     /* Topbar */
@@ -206,6 +209,8 @@
     .content {
       padding: 28px;
       flex: 1;
+      min-width: 0;
+      max-width: 100%;
     }
 
     /* Seções */
@@ -632,32 +637,162 @@
     }
     .empty-state p { font-size: 0.85rem; color: var(--ink-soft); }
 
-    /* ── RESPONSIVO ── */
+    /* ══════════════════════════════════════
+       RESPONSIVO — MOBILE FIRST
+    ══════════════════════════════════════ */
+
+    /* ── Tablet (≤ 1024px) ── */
+    @media (max-width: 1024px) {
+      :root { --sidebar-w: 220px; }
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .content { padding: 20px; }
+    }
+
+    /* ── Mobile (≤ 768px) ── */
+    @media (max-width: 768px) {
+      /* Sidebar vira drawer deslizante */
+      .sidebar {
+        transform: translateX(-110%);
+        width: 280px;
+        box-shadow: none;
+        z-index: 300;
+      }
+      .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 8px 0 40px rgba(58,46,44,0.14);
+      }
+
+      /* Main ocupa tela toda */
+      .main { margin-left: 0; }
+
+      /* Topbar adaptada */
+      .topbar { padding: 0 16px; height: 56px; }
+      .topbar-title { font-size: 1.05rem; }
+      .topbar-badge { display: none; }
+
+      /* Botão Novo Produto: só ícone no mobile */
+      .btn-novo-produto .btn-novo-texto { display: none; }
+      .btn-novo-produto {
+        width: 36px; height: 36px;
+        padding: 0;
+        border-radius: 50%;
+        justify-content: center;
+      }
+
+      /* Hamburger visível */
+      .hamburger { display: flex !important; }
+
+      /* Conteúdo */
+      .content { padding: 16px; }
+
+      /* Stats: 2 colunas */
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+      .stat-card { padding: 16px; }
+      .stat-number { font-size: 1.6rem; }
+      .stat-icon { width: 34px; height: 34px; font-size: 0.95rem; margin-bottom: 10px; }
+
+      /* Tabela: scroll horizontal no mobile */
+      .table-wrap {
+        overflow-x: auto !important;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 12px;
+      }
+      table { min-width: 460px; }
+
+      /* Nas tabelas do dashboard, esconder colunas menos importantes */
+      .col-hide-mobile { display: none; }
+
+      /* Filtros: scroll horizontal */
+      .filter-pills { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+      .filter-pills::-webkit-scrollbar { display: none; }
+      .fpill { flex-shrink: 0; }
+
+      /* Search bar ocupa largura total */
+      .table-header { flex-direction: column; align-items: stretch; gap: 10px; }
+      .search-bar { width: 100%; }
+      .search-bar input { width: 100%; }
+
+      /* Modal em tela cheia no mobile */
+      .modal-overlay { padding: 0; align-items: flex-end; }
+      .modal {
+        border-radius: 20px 20px 0 0;
+        max-height: 92vh;
+        max-width: 100%;
+        transform: translateY(100%);
+      }
+      .modal-overlay.open .modal { transform: translateY(0); }
+      .modal-header { padding: 20px 20px 16px; }
+      .modal-body { padding: 16px 20px; }
+      .modal-footer { padding: 16px 20px; flex-direction: column; }
+      .btn-salvar, .btn-cancelar { width: 100%; text-align: center; justify-content: center; padding: 13px; }
+
+      /* Formulário: 1 coluna no mobile */
+      .form-grid { grid-template-columns: 1fr; }
+      .form-grid .full { grid-column: 1; }
+      .form-field input,
+      .form-field select,
+      .form-field textarea { font-size: 16px; /* previne zoom iOS */ }
+
+      /* Toggle grid: 2 colunas */
+      .toggle-grid { grid-template-columns: repeat(2, 1fr); }
+
+      /* Paginação */
+      .pagination { flex-direction: column; gap: 8px; text-align: center; padding: 12px 16px; }
+
+      /* Toast */
+      #toast { width: calc(100% - 32px); text-align: center; white-space: normal; bottom: 16px; }
+
+      /* Estoque: esconder coluna categoria */
+      #tbody-estoque .col-cat { display: none; }
+    }
+
+    /* ── Telas muito pequenas (≤ 380px) ── */
+    @media (max-width: 380px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .stat-card { padding: 12px; }
+      .stat-number { font-size: 1.4rem; }
+      .topbar-title { font-size: 0.95rem; }
+      .content { padding: 12px; }
+    }
+    /* Hamburger (sempre presente, hidden via CSS desktop) */
     .hamburger {
       display: none;
-      width: 36px; height: 36px;
-      border-radius: 8px;
+      width: 40px; height: 40px;
+      border-radius: 10px;
       border: 1.5px solid var(--linen-dark);
       background: white;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      color: var(--ink);
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Overlay da sidebar */
+    .sidebar-overlay {
+      position: fixed; inset: 0;
+      background: rgba(58,46,44,0.45);
+      backdrop-filter: blur(3px);
+      z-index: 299;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .sidebar-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Indicador de swipe na modal sheet */
+    .modal-handle {
+      display: none;
+      width: 36px; height: 4px;
+      background: var(--linen-dark);
+      border-radius: 2px;
+      margin: 12px auto 0;
     }
     @media (max-width: 768px) {
-      .sidebar { transform: translateX(-100%); }
-      .sidebar.open { transform: translateX(0); box-shadow: 8px 0 40px rgba(58,46,44,0.12); }
-      .main { margin-left: 0; }
-      .hamburger { display: flex; }
-      .form-grid { grid-template-columns: 1fr; }
-      .form-grid .full { grid-column: 1; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      th:nth-child(4), td:nth-child(4),
-      th:nth-child(5), td:nth-child(5) { display: none; }
+      .modal-handle { display: block; }
     }
-    .sidebar-overlay {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(58,46,44,0.3);
-      z-index: 99;
-    }
-    .sidebar-overlay.open { display: block; }
