@@ -1,0 +1,165 @@
+/* ==========================================================================
+   VESTIDA PARA ADORAR — PAINEL ADMINISTRATIVO
+   Página: Estoque — estilos específicos
+   Depende de: produtos.css (variáveis, sidebar, tabela, badges, modal, toast)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. LAYOUT EM DUAS COLUNAS (tabela + movimentações)
+   -------------------------------------------------------------------------- */
+.stock-grid{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+/* --------------------------------------------------------------------------
+   1.1. VARIANTE DE BADGE — SITUAÇÃO "BAIXO" (complementa produtos.css)
+   -------------------------------------------------------------------------- */
+.badge--warning{ background: var(--warning-bg); color: var(--warning); }
+
+/* --------------------------------------------------------------------------
+   2. BADGE DE ESTOQUE MÍNIMO
+   -------------------------------------------------------------------------- */
+.min-stock{ font-size: 12.5px; color: var(--ink-faint); }
+
+/* --------------------------------------------------------------------------
+   3. AJUSTE RÁPIDO (STEPPER) — usado dentro do modal
+   -------------------------------------------------------------------------- */
+.stepper{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stepper__btn{
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--linen);
+  font-size: 16px;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+  flex-shrink: 0;
+}
+
+.stepper__btn:hover{ background: var(--rose-soft); border-color: var(--rose-dark); color: var(--rose-darker); }
+
+.stepper__input{
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* --------------------------------------------------------------------------
+   4. PREVIEW DE NOVO ESTOQUE (dentro do modal de ajuste)
+   -------------------------------------------------------------------------- */
+.stock-preview{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--linen);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-top: 4px;
+}
+
+.stock-preview__label{ font-size: 12px; color: var(--ink-faint); }
+
+.stock-preview__value{
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--rose-darker);
+}
+
+.stock-preview__value.is-negative{ color: var(--danger); }
+
+/* --------------------------------------------------------------------------
+   5. SELETOR DE TIPO DE MOVIMENTAÇÃO (segmented control)
+   -------------------------------------------------------------------------- */
+.segmented{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.segmented__option{ position: relative; }
+
+.segmented__option input{
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  cursor: pointer;
+}
+
+.segmented__label{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  text-align: center;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.segmented__option input:checked + .segmented__label{
+  background: var(--rose-soft);
+  border-color: var(--rose-dark);
+  color: var(--rose-darker);
+  font-weight: 500;
+}
+
+.segmented__option input:focus-visible + .segmented__label{
+  outline: 2px solid var(--rose-dark);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   6. FEED DE MOVIMENTAÇÕES RECENTES
+   -------------------------------------------------------------------------- */
+.movement-feed{ display: flex; flex-direction: column; gap: 16px; }
+
+.movement-item{ display: flex; gap: 12px; align-items: flex-start; }
+
+.movement-item__icon{
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.movement-item__icon--entrada{ background: var(--success-bg); color: var(--success); }
+.movement-item__icon--saida{ background: var(--danger-bg); color: var(--danger); }
+.movement-item__icon--ajuste{ background: var(--info-bg); color: var(--info); }
+
+.movement-item__title{ font-size: 13px; font-weight: 500; }
+.movement-item__qty{ font-size: 12px; font-weight: 600; }
+.movement-item__qty.is-positive{ color: var(--success); }
+.movement-item__qty.is-negative{ color: var(--danger); }
+.movement-item__time{ font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
+
+/* --------------------------------------------------------------------------
+   7. RESPONSIVIDADE
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px){
+  .stock-grid{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 860px){
+  .segmented{ grid-template-columns: 1fr; }
+}

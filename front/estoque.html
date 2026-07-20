@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estoque · Vestida para Adorar</title>
+<meta name="description" content="Controle de estoque da loja Vestida para Adorar.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/produtos.css">
+<link rel="stylesheet" href="../css/theme-upgrade.css">
+<link rel="stylesheet" href="../css/estoque.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ==========================================================
+       SIDEBAR
+       ========================================================== -->
+  <aside class="sidebar" id="sidebar" aria-label="Navegação principal">
+    <div class="sidebar__brand">
+      <div class="sidebar__brand-icon" aria-hidden="true">+</div>
+      <p class="sidebar__brand-name">Vestida para <em>Adorar</em></p>
+      <p class="sidebar__brand-tag">Painel Administrativo</p>
+    </div>
+
+    <p class="sidebar__label">Principal</p>
+    <nav class="sidebar__nav" aria-label="Seções principais">
+      <a class="sidebar__link" href="visao-geral.html">
+        <span class="sidebar__link-icon" aria-hidden="true">▦</span> Visão Geral
+      </a>
+      <a class="sidebar__link" href="produtos.html">
+        <span class="sidebar__link-icon" aria-hidden="true">🛍</span> Produtos
+      </a>
+      <a class="sidebar__link is-active" href="estoque.html" aria-current="page">
+        <span class="sidebar__link-icon" aria-hidden="true">◫</span> Estoque
+      </a>
+    </nav>
+
+    <p class="sidebar__label">Configurações</p>
+    <nav class="sidebar__nav" aria-label="Configurações">
+      <a class="sidebar__link" href="#" target="_blank" rel="noopener">
+        <span class="sidebar__link-icon" aria-hidden="true">↗</span> Ver Site
+      </a>
+      <a class="sidebar__link" href="#">
+        <span class="sidebar__link-icon" aria-hidden="true">⏻</span> Sair
+      </a>
+    </nav>
+
+    <div class="sidebar__footer">
+      <a class="sidebar__user" href="#" aria-label="Conta do administrador">
+        <span class="sidebar__avatar" aria-hidden="true">A</span>
+        <span>
+          <span class="sidebar__user-name" style="display:block;">admin</span>
+          <span class="sidebar__user-role">Administrador</span>
+        </span>
+      </a>
+    </div>
+  </aside>
+
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <!-- ==========================================================
+       MAIN
+       ========================================================== -->
+  <div class="main">
+
+    <!-- TOPBAR (mobile) -->
+    <header class="topbar">
+      <button class="topbar__menu-btn" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+      <h1 class="topbar__title">Estoque</h1>
+      <button class="topbar__bell" aria-label="Notificações, 2 novas">
+        🔔
+        <span class="topbar__bell-badge" aria-hidden="true">2</span>
+      </button>
+    </header>
+
+    <main class="content">
+
+      <!-- Cabeçalho de página -->
+      <div class="page-header">
+        <div class="page-header__title-wrap">
+          <h1 class="page-header__title">Estoque</h1>
+          <span class="page-header__count" id="resultCount">6 itens</span>
+        </div>
+        <button class="btn btn--primary" id="btnNovaMovimentacao">
+          <span aria-hidden="true">＋</span> Nova Movimentação
+        </button>
+      </div>
+
+      <!-- Cartões de estatística -->
+      <section class="stats" aria-label="Resumo de estoque">
+        <div class="stat-card">
+          <div class="stat-card__icon" style="background: var(--gold-soft); color: var(--gold);" aria-hidden="true">💰</div>
+          <div>
+            <p class="stat-card__label">Valor em Estoque</p>
+            <p class="stat-card__value" id="statValor">—</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--success" aria-hidden="true">✓</div>
+          <div>
+            <p class="stat-card__label">Estoque Normal</p>
+            <p class="stat-card__value" id="statNormal">—</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--warning" aria-hidden="true">⚠</div>
+          <div>
+            <p class="stat-card__label">Estoque Baixo</p>
+            <p class="stat-card__value" id="statBaixo">—</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--danger" aria-hidden="true">✕</div>
+          <div>
+            <p class="stat-card__label">Sem Estoque</p>
+            <p class="stat-card__value" id="statSemEstoque">—</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="stock-grid">
+
+        <!-- Coluna principal — tabela de estoque -->
+        <section class="panel" aria-label="Itens em estoque">
+
+          <div class="toolbar">
+            <div class="field search-field">
+              <label for="searchInput" class="field__label">Buscar</label>
+              <span class="search-field__icon" aria-hidden="true">🔍</span>
+              <input type="search" id="searchInput" class="input" placeholder="Buscar por nome...">
+            </div>
+
+            <div class="field select-field">
+              <label for="categoryFilter" class="field__label">Categoria</label>
+              <select id="categoryFilter" class="select">
+                <option value="todas">Todas as categorias</option>
+                <option value="Saias">Saias</option>
+                <option value="Blusas">Blusas</option>
+                <option value="Vestidos">Vestidos</option>
+                <option value="Conjuntos">Conjuntos</option>
+              </select>
+            </div>
+
+            <div class="field select-field">
+              <label for="stockStatusFilter" class="field__label">Situação</label>
+              <select id="stockStatusFilter" class="select">
+                <option value="todos">Todas</option>
+                <option value="normal">Normal</option>
+                <option value="baixo">Baixo</option>
+                <option value="semEstoque">Sem estoque</option>
+                <option value="inativo">Inativo</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Produto</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Estoque Atual</th>
+                  <th scope="col">Estoque Mínimo</th>
+                  <th scope="col">Situação</th>
+                  <th scope="col">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody"><!-- preenchido via JavaScript --></tbody>
+            </table>
+          </div>
+
+          <div class="product-cards" id="cardsList"><!-- preenchido via JavaScript --></div>
+
+          <div class="empty-state" id="emptyState">
+            <div class="empty-state__icon" aria-hidden="true">🔍</div>
+            <h2 class="empty-state__title">Nenhum item encontrado</h2>
+            <p class="empty-state__text">Tente ajustar os filtros ou o termo de busca.</p>
+            <button class="btn btn--ghost" id="btnLimparFiltros">Limpar filtros</button>
+          </div>
+
+          <div class="panel__footer">
+            <p class="panel__footer-text" id="paginationInfo">Mostrando 6 de 6 itens</p>
+            <nav class="pagination" id="pagination" aria-label="Paginação de estoque"></nav>
+          </div>
+        </section>
+
+        <!-- Coluna lateral — movimentações recentes -->
+        <aside class="info-panel-wrap">
+          <section class="panel" aria-label="Movimentações recentes" style="padding: 20px;">
+            <p class="info-panel__title" style="font-size:11px; letter-spacing:0.8px; text-transform:uppercase; color:var(--ink-faint); margin-bottom:18px;">Movimentações Recentes</p>
+            <div class="movement-feed" id="movementFeed"></div>
+          </section>
+        </aside>
+
+      </div>
+
+    </main>
+
+    <footer style="text-align:center; padding: 20px; font-size:12px; color: var(--ink-faint);">
+      © 2026 Vestida para Adorar — Painel Administrativo
+    </footer>
+  </div>
+</div>
+
+<!-- ==========================================================
+     BOTTOM NAVIGATION (mobile)
+     ========================================================== -->
+<nav class="bottom-nav" aria-label="Navegação rápida">
+  <a class="bottom-nav__item" href="visao-geral.html"><span aria-hidden="true">🏠</span>Início</a>
+  <a class="bottom-nav__item" href="produtos.html"><span aria-hidden="true">🛍</span>Produtos</a>
+  <a class="bottom-nav__item is-active" href="estoque.html"><span aria-hidden="true">◫</span>Estoque</a>
+  <a class="bottom-nav__item" href="#" target="_blank" rel="noopener"><span aria-hidden="true">↗</span>Ver Site</a>
+  <a class="bottom-nav__item" href="#"><span aria-hidden="true">⏻</span>Sair</a>
+</nav>
+
+<!-- ==========================================================
+     MODAL — AJUSTAR ESTOQUE / NOVA MOVIMENTAÇÃO
+     ========================================================== -->
+<div class="modal-overlay" id="stockModalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="stockModalTitle">
+    <div class="modal__header">
+      <h2 class="modal__title" id="stockModalTitle">Nova Movimentação</h2>
+      <button class="modal__close" id="closeStockModal" aria-label="Fechar">✕</button>
+    </div>
+
+    <form id="stockForm" novalidate>
+      <div class="modal__body">
+
+        <div class="field--full">
+          <label class="field__label" for="movementProduct">Produto</label>
+          <select id="movementProduct" class="select" required aria-required="true"></select>
+        </div>
+
+        <div class="field--full">
+          <span class="field__label" style="display:block; margin-bottom:8px;">Tipo de movimentação</span>
+          <div class="segmented" role="radiogroup" aria-label="Tipo de movimentação">
+            <label class="segmented__option">
+              <input type="radio" name="movementType" value="entrada" checked>
+              <span class="segmented__label">↑ Entrada</span>
+            </label>
+            <label class="segmented__option">
+              <input type="radio" name="movementType" value="saida">
+              <span class="segmented__label">↓ Saída</span>
+            </label>
+            <label class="segmented__option">
+              <input type="radio" name="movementType" value="ajuste">
+              <span class="segmented__label">⇄ Ajuste</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="field--full">
+          <label class="field__label" for="movementQty">Quantidade</label>
+          <div class="stepper">
+            <button type="button" class="stepper__btn" id="qtyMinus" aria-label="Diminuir quantidade">−</button>
+            <input type="number" id="movementQty" class="input stepper__input" min="1" step="1" value="1" required aria-required="true">
+            <button type="button" class="stepper__btn" id="qtyPlus" aria-label="Aumentar quantidade">＋</button>
+          </div>
+        </div>
+
+        <div class="field--full">
+          <div class="stock-preview">
+            <span class="stock-preview__label">Novo estoque</span>
+            <span class="stock-preview__value" id="stockPreviewValue">—</span>
+          </div>
+        </div>
+
+        <div class="field--full">
+          <label class="field__label" for="movementNote">Observação (opcional)</label>
+          <textarea id="movementNote" class="textarea" placeholder="Ex: recebimento de fornecedor, troca, avaria..."></textarea>
+        </div>
+
+      </div>
+
+      <div class="modal__footer">
+        <button type="button" class="btn btn--ghost" id="cancelStockModal">Cancelar</button>
+        <button type="submit" class="btn btn--primary">Salvar Movimentação</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="true"></div>
+
+<script src="../js/Dashboard/common.js"></script>
+<script src="../js/Dashboard/estoque.js"></script>
+<script src="../js/Dashboard/micro.js"></script>
+</body>
+</html>

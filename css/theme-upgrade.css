@@ -1,0 +1,435 @@
+/* ==========================================================================
+   VESTIDA PARA ADORAR — UPGRADE VISUAL (não altera paleta)
+   Camada aplicada por cima de produtos.css / estoque.css / visao-geral.css
+   ========================================================================== */
+
+:root{
+  --grad-rose:   linear-gradient(135deg, #b8697a 0%, #9c5163 100%);
+  --grad-gold:   linear-gradient(135deg, #d9b26a 0%, #c69850 100%);
+  --grad-linen:  linear-gradient(180deg, #faf6f2 0%, #f4ede7 100%);
+  --grad-panel:  linear-gradient(180deg, #ffffff 0%, #fdfaf8 100%);
+  --ring-rose:   0 0 0 4px rgba(184, 105, 122, 0.14);
+  --shadow-soft: 0 1px 2px rgba(58,46,48,.04), 0 4px 14px rgba(154,108,122,.08);
+  --shadow-hover:0 2px 4px rgba(58,46,48,.05), 0 18px 40px rgba(154,108,122,.15);
+  --shadow-inset:inset 0 1px 0 rgba(255,255,255,.6);
+  --ease-out:    cubic-bezier(.22,.61,.36,1);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+}
+
+/* --------------------------------------------------------------------------
+   BASE — tipografia + textura de fundo suave
+   -------------------------------------------------------------------------- */
+html{ text-rendering: optimizeLegibility; }
+
+body{
+  background:
+    radial-gradient(1200px 600px at 100% -10%, rgba(243, 221, 225, .55), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(246, 236, 214, .45), transparent 60%),
+    var(--linen);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4{ letter-spacing: -0.01em; }
+
+::selection{ background: var(--rose); color: var(--ink); }
+
+/* Scrollbar polido */
+::-webkit-scrollbar-thumb{
+  background: linear-gradient(180deg, var(--rose-dark), var(--rose-darker));
+  border-radius: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   SIDEBAR — profundidade e indicador ativo
+   -------------------------------------------------------------------------- */
+.sidebar{
+  background: linear-gradient(180deg, #ffffff 0%, #fdf9f6 100%);
+  border-right: 1px solid rgba(236, 225, 220, .8);
+  box-shadow: 1px 0 0 rgba(255,255,255,.6) inset, 0 20px 40px -20px rgba(154,108,122,.08);
+}
+
+.sidebar__brand-icon{
+  background: var(--grad-rose);
+  color: var(--white);
+  box-shadow: 0 8px 20px -6px rgba(184,105,122,.55), var(--shadow-inset);
+  transform: rotate(0deg);
+  transition: transform .5s var(--ease-spring);
+}
+.sidebar:hover .sidebar__brand-icon{ transform: rotate(90deg); }
+
+.sidebar__link{
+  position: relative;
+  overflow: hidden;
+}
+.sidebar__link::before{
+  content:''; position:absolute; left:0; top:8px; bottom:8px; width:3px;
+  background: var(--rose-dark); border-radius: 0 3px 3px 0;
+  transform: scaleY(0); transform-origin: center;
+  transition: transform .3s var(--ease-spring);
+}
+.sidebar__link:hover{ background: rgba(248, 235, 238, .55); }
+.sidebar__link.is-active{
+  background: linear-gradient(90deg, rgba(248,235,238,.9), rgba(248,235,238,.35));
+  color: var(--rose-darker);
+}
+.sidebar__link.is-active::before{ transform: scaleY(1); }
+.sidebar__link-icon{
+  transition: transform .3s var(--ease-spring);
+}
+.sidebar__link:hover .sidebar__link-icon{ transform: translateX(2px) scale(1.1); }
+
+.sidebar__avatar{
+  background: var(--grad-rose);
+  box-shadow: 0 6px 14px -4px rgba(184,105,122,.5), var(--shadow-inset);
+}
+
+/* --------------------------------------------------------------------------
+   PAGE HEADER
+   -------------------------------------------------------------------------- */
+.page-header__title{
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  background: linear-gradient(180deg, var(--ink) 0%, #574548 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.page-header__count{
+  padding: 3px 10px;
+  background: var(--rose-soft);
+  color: var(--rose-darker);
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   BOTÕES — brilho e microelevação
+   -------------------------------------------------------------------------- */
+.btn{
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out),
+              background .25s var(--ease-out), color .25s var(--ease-out);
+}
+.btn::after{
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform .7s var(--ease-out);
+  pointer-events: none;
+}
+.btn:hover::after{ transform: translateX(120%); }
+.btn:hover{ transform: translateY(-1px); }
+
+.btn--primary{
+  background: var(--grad-rose);
+  box-shadow: 0 8px 20px -8px rgba(184,105,122,.6), var(--shadow-inset);
+}
+.btn--primary:hover{
+  box-shadow: 0 14px 28px -10px rgba(156,81,99,.7), var(--shadow-inset);
+}
+
+.btn--ghost{
+  backdrop-filter: blur(6px);
+  background: rgba(255,255,255,.72);
+}
+.btn--ghost:hover{
+  background: var(--white);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Ripple para feedback tátil */
+.btn .ripple, .icon-btn .ripple, .pagination__btn .ripple{
+  position:absolute; border-radius:50%;
+  background: rgba(255,255,255,.55);
+  transform: scale(0); opacity:1; pointer-events:none;
+  animation: ripple .6s var(--ease-out) forwards;
+}
+.btn--ghost .ripple, .icon-btn .ripple, .pagination__btn .ripple{
+  background: rgba(184,105,122,.25);
+}
+@keyframes ripple{
+  to{ transform: scale(4); opacity:0; }
+}
+
+.icon-btn{
+  position: relative; overflow: hidden;
+  transition: transform .25s var(--ease-spring), background .25s var(--ease-out), color .25s var(--ease-out);
+}
+.icon-btn:hover{ transform: translateY(-1px) scale(1.06); }
+
+/* --------------------------------------------------------------------------
+   STAT CARDS — barra superior + efeito de elevação
+   -------------------------------------------------------------------------- */
+.stat-card{
+  position: relative;
+  background: var(--grad-panel);
+  border: 1px solid rgba(236,225,220,.9);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  transition: transform .35s var(--ease-spring), box-shadow .35s var(--ease-out);
+}
+.stat-card::before{
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background: var(--grad-rose);
+  opacity: .0; transition: opacity .35s var(--ease-out);
+}
+.stat-card:hover{ transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.stat-card:hover::before{ opacity: 1; }
+
+.stat-card__icon{
+  transition: transform .5s var(--ease-spring);
+  box-shadow: var(--shadow-inset);
+}
+.stat-card:hover .stat-card__icon{ transform: rotate(-6deg) scale(1.08); }
+
+.stat-card__value{
+  letter-spacing: -0.02em;
+  background: linear-gradient(180deg, var(--ink) 0%, #574548 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   PANEL / TOOLBAR / INPUTS
+   -------------------------------------------------------------------------- */
+.panel{
+  background: var(--grad-panel);
+  border: 1px solid rgba(236,225,220,.9);
+  box-shadow: var(--shadow-soft);
+}
+
+.toolbar{
+  background: linear-gradient(180deg, rgba(255,255,255,.6), rgba(250,246,242,.4));
+  border-bottom: 1px solid rgba(236,225,220,.7);
+}
+
+.input, .select, .textarea{
+  background: #fbf7f4;
+  transition: border-color .25s var(--ease-out), box-shadow .25s var(--ease-out),
+              background .25s var(--ease-out), transform .2s var(--ease-out);
+}
+.input:hover, .select:hover, .textarea:hover{ border-color: #d9c8c2; }
+.input:focus, .select:focus, .textarea:focus{
+  background: var(--white);
+  box-shadow: var(--ring-rose);
+}
+.search-field__icon{
+  transition: color .25s var(--ease-out);
+  font-size: 13px;
+  line-height: 1;
+  width: 16px; height: 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  left: 14px;
+  pointer-events: none;
+  opacity: .7;
+}
+.search-field:focus-within .search-field__icon{ color: var(--rose-dark); opacity: 1; }
+.search-field .input{ padding-left: 40px !important; }
+
+/* Upload box — layout column centrado */
+.upload-box{
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 120px;
+  border-radius: 14px;
+  border-style: dashed;
+  position: relative;
+  overflow: hidden;
+}
+.upload-box__icon{
+  font-size: 26px !important;
+  margin: 0 !important;
+  line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 6px 14px -8px rgba(154,108,122,.35), inset 0 0 0 1px rgba(236,225,220,.9);
+}
+.upload-box #uploadBoxText,
+.upload-box span{ display: block; text-align: center; }
+
+/* --------------------------------------------------------------------------
+   TABLE — indicador ao passar o mouse + linha ativa
+   -------------------------------------------------------------------------- */
+.table thead th{
+  background: linear-gradient(180deg, #fdfaf8 0%, #f8f2ee 100%);
+  position: sticky; top: 0;
+}
+.table tbody tr{
+  position: relative;
+  transition: background .25s var(--ease-out), box-shadow .25s var(--ease-out);
+}
+.table tbody tr:hover{
+  background: linear-gradient(90deg, rgba(248,235,238,.7), rgba(248,235,238,.15));
+  box-shadow: inset 3px 0 0 var(--rose-dark);
+}
+.product-cell__img{
+  box-shadow: 0 4px 10px -4px rgba(154,108,122,.35);
+  transition: transform .35s var(--ease-spring);
+}
+.table tbody tr:hover .product-cell__img{ transform: scale(1.06) rotate(-2deg); }
+
+/* --------------------------------------------------------------------------
+   BADGES — mais delicados
+   -------------------------------------------------------------------------- */
+.badge{
+  border: 1px solid transparent;
+  backdrop-filter: blur(2px);
+}
+.badge--success{ border-color: rgba(63,166,108,.2); }
+.badge--warning{ border-color: rgba(201,147,47,.22); }
+.badge--danger { border-color: rgba(194,72,90,.22); }
+.badge--muted  { border-color: rgba(167,154,156,.25); }
+
+.badge::before{ box-shadow: 0 0 0 3px rgba(255,255,255,.6); }
+
+/* --------------------------------------------------------------------------
+   PAGINAÇÃO
+   -------------------------------------------------------------------------- */
+.pagination__btn{
+  position: relative; overflow: hidden;
+  border: 1px solid transparent;
+  transition: all .25s var(--ease-out);
+}
+.pagination__btn:hover{
+  background: var(--rose-soft);
+  border-color: var(--rose);
+  color: var(--rose-darker);
+}
+.pagination__btn.is-active{
+  background: var(--grad-rose);
+  box-shadow: 0 6px 14px -6px rgba(156,81,99,.6);
+}
+
+/* --------------------------------------------------------------------------
+   MODAL — glass mais elegante
+   -------------------------------------------------------------------------- */
+.modal-overlay{
+  background: radial-gradient(ellipse at center, rgba(58,46,48,.45), rgba(58,46,48,.25));
+  backdrop-filter: blur(6px);
+}
+.modal{
+  background: var(--grad-panel);
+  border: 1px solid rgba(255,255,255,.7);
+  box-shadow: 0 40px 80px -30px rgba(58,46,48,.5), var(--shadow-inset);
+}
+.modal__header{
+  background: linear-gradient(180deg, rgba(248,235,238,.55), transparent);
+}
+
+.upload-box{
+  background: linear-gradient(180deg, #fbf7f4, #f6efeb);
+}
+
+/* --------------------------------------------------------------------------
+   TOAST
+   -------------------------------------------------------------------------- */
+.toast{
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,.92);
+  border-radius: 12px;
+  box-shadow: 0 20px 40px -20px rgba(58,46,48,.35);
+}
+
+/* --------------------------------------------------------------------------
+   VISÃO GERAL — painéis com brilho
+   -------------------------------------------------------------------------- */
+.info-panel{
+  background: var(--grad-panel);
+  border: 1px solid rgba(236,225,220,.9);
+  box-shadow: var(--shadow-soft);
+  transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out);
+}
+.info-panel:hover{ box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+
+.value-panel__amount{
+  background: linear-gradient(135deg, var(--ink) 0%, var(--rose-darker) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.value-panel__icon{
+  background: var(--grad-gold);
+  color: var(--white);
+  box-shadow: 0 10px 24px -8px rgba(217,178,106,.65), var(--shadow-inset);
+}
+
+/* --------------------------------------------------------------------------
+   ESTOQUE — stepper e preview
+   -------------------------------------------------------------------------- */
+.stepper__btn{
+  transition: all .2s var(--ease-out);
+}
+.stepper__btn:hover{
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
+}
+
+.stock-preview{
+  background: linear-gradient(135deg, #fbf7f4 0%, #f6ecd6 100%);
+  border: 1px solid rgba(217,178,106,.2);
+}
+
+/* --------------------------------------------------------------------------
+   BOTTOM NAV mobile
+   -------------------------------------------------------------------------- */
+.bottom-nav{
+  backdrop-filter: blur(14px);
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 -12px 30px -12px rgba(58,46,48,.15);
+}
+.bottom-nav__item{
+  position: relative;
+  transition: color .25s var(--ease-out), transform .25s var(--ease-spring);
+}
+.bottom-nav__item.is-active{
+  transform: translateY(-2px);
+}
+.bottom-nav__item.is-active::before{
+  content:''; position:absolute; top:2px; left:50%; transform:translateX(-50%);
+  width:22px; height:3px; border-radius:0 0 3px 3px;
+  background: var(--grad-rose);
+}
+
+.topbar{
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,.85);
+  border-bottom: 1px solid rgba(236,225,220,.7);
+}
+.topbar__bell{
+  transition: all .25s var(--ease-out);
+}
+.topbar__bell:hover{ background: var(--rose-soft); color: var(--rose-darker); }
+
+/* --------------------------------------------------------------------------
+   REVEAL — micro-animação de entrada (adicionada por micro.js)
+   -------------------------------------------------------------------------- */
+[data-reveal]{
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .6s var(--ease-out), transform .6s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal].is-visible{ opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce){
+  [data-reveal]{ opacity:1 !important; transform:none !important; }
+  .btn::after{ display:none; }
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVIDADE ADICIONAL
+   -------------------------------------------------------------------------- */
+@media (max-width: 860px){
+  body{ background-attachment: scroll; }
+  .page-header__title{ font-size: 24px; }
+  .stat-card{ border-radius: 16px; }
+  .modal{ border-radius: 20px; }
+}
+@media (max-width: 480px){
+  .content{ padding: 16px 14px 100px !important; }
+  .stat-card__value{ font-size: 18px; }
+  .btn{ padding: 10px 16px; }
+}

@@ -1,0 +1,191 @@
+/* ==========================================================================
+   VESTIDA PARA ADORAR — PAINEL ADMINISTRATIVO
+   Página: Visão Geral — estilos específicos
+   Depende de: produtos.css (variáveis, sidebar, tabela, badges, modal, toast)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. GRID DE CARTÕES DE RESUMO (5 colunas)
+   -------------------------------------------------------------------------- */
+.stats--overview{ grid-template-columns: repeat(5, 1fr); }
+
+/* --------------------------------------------------------------------------
+   2. LINHA DE PAINÉIS (Valor em estoque / Donut / Atividades)
+   -------------------------------------------------------------------------- */
+.overview-grid{
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1.2fr;
+  gap: 16px;
+  margin-bottom: 24px;
+  align-items: stretch;
+}
+
+.info-panel{
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-panel__title{
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-family: var(--font-body);
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+
+/* --------------------------------------------------------------------------
+   3. VALOR TOTAL EM ESTOQUE
+   -------------------------------------------------------------------------- */
+.value-panel__row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.value-panel__amount{
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.value-panel__caption{
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-top: 4px;
+}
+
+.value-panel__icon{
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--gold-soft);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   4. RESUMO DE ESTOQUE (DONUT CHART)
+   -------------------------------------------------------------------------- */
+.donut-panel{ flex-direction: row; align-items: center; gap: 18px; }
+
+.donut-wrap{
+  position: relative;
+  width: 128px;
+  height: 128px;
+  flex-shrink: 0;
+}
+
+.donut-wrap svg{ width: 100%; height: 100%; }
+
+.donut-center{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  pointer-events: none;
+}
+
+.donut-center__value{ font-family: var(--font-display); font-size: 22px; font-weight: 600; }
+.donut-center__label{ font-size: 9.5px; color: var(--ink-faint); letter-spacing: 0.4px; text-transform: uppercase; }
+
+.donut-legend{ display: flex; flex-direction: column; gap: 10px; flex: 1; }
+
+.donut-legend__item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12.5px;
+}
+
+.donut-legend__label{ display: flex; align-items: center; gap: 8px; color: var(--ink-soft); }
+
+.donut-legend__dot{ width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+.donut-legend__value{ color: var(--ink-faint); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* --------------------------------------------------------------------------
+   5. ATIVIDADES RECENTES
+   -------------------------------------------------------------------------- */
+.activity-feed{ display: flex; flex-direction: column; gap: 16px; flex: 1; }
+
+.activity-item{ display: flex; gap: 12px; }
+
+.activity-item__icon{
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.activity-item__icon--create{ background: var(--info-bg); color: var(--info); }
+.activity-item__icon--update{ background: var(--success-bg); color: var(--success); }
+.activity-item__icon--inactive{ background: var(--danger-bg); color: var(--danger); }
+
+.activity-item__title{ font-size: 13px; font-weight: 500; }
+.activity-item__desc{ font-size: 12px; color: var(--ink-soft); }
+.activity-item__time{ font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
+
+.link-more{
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 12.5px;
+  color: var(--rose-dark);
+  font-weight: 500;
+  text-align: center;
+  transition: color var(--transition);
+  align-self: center;
+}
+
+.link-more:hover{ color: var(--rose-darker); text-decoration: underline; }
+
+/* --------------------------------------------------------------------------
+   6. PRODUTOS RECENTES (título de seção)
+   -------------------------------------------------------------------------- */
+.section-title{ font-size: 18px; margin-bottom: 14px; }
+
+.panel__footer--center{ justify-content: center; }
+
+/* --------------------------------------------------------------------------
+   7. RESPONSIVIDADE
+   -------------------------------------------------------------------------- */
+@media (max-width: 1180px){
+  .overview-grid{ grid-template-columns: 1fr; }
+  .donut-panel{ flex-direction: row; }
+}
+
+@media (max-width: 1024px){
+  .stats--overview{ grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 860px){
+  .stats--overview{ grid-template-columns: repeat(2, 1fr); }
+  .donut-panel{ flex-direction: column; align-items: flex-start; }
+  .donut-wrap{ align-self: center; }
+}
+
+@media (max-width: 480px){
+  .stats--overview{ grid-template-columns: 1fr 1fr; }
+  .value-panel__row{ flex-direction: row; }
+}

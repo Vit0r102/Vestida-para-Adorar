@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produtos · Vestida para Adorar</title>
+<meta name="description" content="Gerencie o catálogo de produtos da Vestida para Adorar.">
+
+<!-- Tipografia -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/produtos.css">
+<link rel="stylesheet" href="../css/theme-upgrade.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ==========================================================
+       SIDEBAR
+       ========================================================== -->
+  <aside class="sidebar" id="sidebar" aria-label="Navegação principal">
+    <div class="sidebar__brand">
+      <div class="sidebar__brand-icon" aria-hidden="true">+</div>
+      <p class="sidebar__brand-name">Vestida para <em>Adorar</em></p>
+      <p class="sidebar__brand-tag">Painel Administrativo</p>
+    </div>
+
+    <p class="sidebar__label">Principal</p>
+    <nav class="sidebar__nav" aria-label="Seções principais">
+      <a class="sidebar__link" href="visao-geral.html">
+        <span class="sidebar__link-icon" aria-hidden="true">▦</span> Visão Geral
+      </a>
+      <a class="sidebar__link is-active" href="produtos.html" aria-current="page">
+        <span class="sidebar__link-icon" aria-hidden="true">🛍</span> Produtos
+      </a>
+      <a class="sidebar__link" href="estoque.html">
+        <span class="sidebar__link-icon" aria-hidden="true">◫</span> Estoque
+      </a>
+    </nav>
+
+    <p class="sidebar__label">Configurações</p>
+    <nav class="sidebar__nav" aria-label="Configurações">
+      <a class="sidebar__link" href="#" target="_blank" rel="noopener">
+        <span class="sidebar__link-icon" aria-hidden="true">↗</span> Ver Site
+      </a>
+      <a class="sidebar__link" href="#">
+        <span class="sidebar__link-icon" aria-hidden="true">⏻</span> Sair
+      </a>
+    </nav>
+
+    <div class="sidebar__footer">
+      <a class="sidebar__user" href="#" aria-label="Conta do administrador">
+        <span class="sidebar__avatar" aria-hidden="true">A</span>
+        <span>
+          <span class="sidebar__user-name" style="display:block;">admin</span>
+          <span class="sidebar__user-role">Administrador</span>
+        </span>
+      </a>
+    </div>
+  </aside>
+
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <!-- ==========================================================
+       MAIN
+       ========================================================== -->
+  <div class="main">
+
+    <!-- TOPBAR (mobile) -->
+    <header class="topbar">
+      <button class="topbar__menu-btn" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+      <h1 class="topbar__title">Produtos</h1>
+      <button class="topbar__bell" aria-label="Notificações, 2 novas">
+        🔔
+        <span class="topbar__bell-badge" aria-hidden="true">2</span>
+      </button>
+    </header>
+
+    <main class="content">
+
+      <!-- Cabeçalho de página -->
+      <div class="page-header">
+        <div class="page-header__title-wrap">
+          <h1 class="page-header__title">Produtos</h1>
+          <span class="page-header__count" id="resultCount">6 produtos</span>
+        </div>
+        <button class="btn btn--primary" id="btnNovoProduto">
+          <span aria-hidden="true">＋</span> Novo Produto
+        </button>
+      </div>
+
+      <!-- Cartões de estatística -->
+      <section class="stats" aria-label="Resumo de produtos">
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--rose" aria-hidden="true">🛍</div>
+          <div>
+            <p class="stat-card__label">Total de Produtos</p>
+            <p class="stat-card__value" id="statTotal">6</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--success" aria-hidden="true">✓</div>
+          <div>
+            <p class="stat-card__label">Produtos Ativos</p>
+            <p class="stat-card__value" id="statAtivos">5</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--warning" aria-hidden="true">⚠</div>
+          <div>
+            <p class="stat-card__label">Estoque Baixo</p>
+            <p class="stat-card__value" id="statBaixo">1</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--danger" aria-hidden="true">✕</div>
+          <div>
+            <p class="stat-card__label">Sem Estoque</p>
+            <p class="stat-card__value" id="statSemEstoque">1</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Painel de produtos -->
+      <section class="panel" aria-label="Lista de produtos">
+
+        <!-- Barra de filtros -->
+        <div class="toolbar">
+          <div class="field search-field">
+            <label for="searchInput" class="field__label">Buscar</label>
+            <span class="search-field__icon" aria-hidden="true">🔍</span>
+            <input type="search" id="searchInput" class="input" placeholder="Buscar por nome...">
+          </div>
+
+          <div class="field select-field">
+            <label for="categoryFilter" class="field__label">Categoria</label>
+            <select id="categoryFilter" class="select">
+              <option value="todas">Todas as categorias</option>
+              <option value="Saias">Saias</option>
+              <option value="Blusas">Blusas</option>
+              <option value="Vestidos">Vestidos</option>
+              <option value="Conjuntos">Conjuntos</option>
+            </select>
+          </div>
+
+          <div class="field select-field">
+            <label for="statusFilter" class="field__label">Status</label>
+            <select id="statusFilter" class="select">
+              <option value="todos">Todos</option>
+              <option value="Ativo">Ativo</option>
+              <option value="Inativo">Inativo</option>
+            </select>
+          </div>
+
+          <div class="field select-field">
+            <label for="sortFilter" class="field__label">Ordenar por</label>
+            <select id="sortFilter" class="select">
+              <option value="recentes">Mais recentes</option>
+              <option value="nome">Nome (A-Z)</option>
+              <option value="preco-asc">Preço (menor-maior)</option>
+              <option value="preco-desc">Preço (maior-menor)</option>
+              <option value="estoque">Estoque (menor-maior)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Tabela (desktop / tablet) -->
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Produto</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Estoque</th>
+                <th scope="col">Status</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"><!-- preenchido via JavaScript --></tbody>
+          </table>
+        </div>
+
+        <!-- Cartões (mobile) -->
+        <div class="product-cards" id="cardsList"><!-- preenchido via JavaScript --></div>
+
+        <!-- Estado vazio -->
+        <div class="empty-state" id="emptyState">
+          <div class="empty-state__icon" aria-hidden="true">🔍</div>
+          <h2 class="empty-state__title">Nenhum produto encontrado</h2>
+          <p class="empty-state__text">Tente ajustar os filtros ou o termo de busca, ou cadastre um novo produto.</p>
+          <button class="btn btn--ghost" id="btnLimparFiltros">Limpar filtros</button>
+        </div>
+
+        <!-- Rodapé / paginação -->
+        <div class="panel__footer">
+          <p class="panel__footer-text" id="paginationInfo">Mostrando 6 de 6 produtos</p>
+          <nav class="pagination" id="pagination" aria-label="Paginação de produtos"></nav>
+        </div>
+
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer style="text-align:center; padding: 20px; font-size:12px; color: var(--ink-faint);">
+      © 2026 Vestida para Adorar — Painel Administrativo
+    </footer>
+  </div>
+</div>
+
+<!-- ==========================================================
+     BOTTOM NAVIGATION (mobile)
+     ========================================================== -->
+<nav class="bottom-nav" aria-label="Navegação rápida">
+  <a class="bottom-nav__item" href="visao-geral.html"><span aria-hidden="true">🏠</span>Início</a>
+  <a class="bottom-nav__item is-active" href="produtos.html"><span aria-hidden="true">🛍</span>Produtos</a>
+  <a class="bottom-nav__item" href="estoque.html"><span aria-hidden="true">◫</span>Estoque</a>
+  <a class="bottom-nav__item" href="#" target="_blank" rel="noopener"><span aria-hidden="true">↗</span>Ver Site</a>
+  <a class="bottom-nav__item" href="#"><span aria-hidden="true">⏻</span>Sair</a>
+</nav>
+
+<!-- ==========================================================
+     MODAL — NOVO / EDITAR PRODUTO
+     ========================================================== -->
+<div class="modal-overlay" id="productModalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="productModalTitle">
+    <div class="modal__header">
+      <h2 class="modal__title" id="productModalTitle">Novo Produto</h2>
+      <button class="modal__close" id="closeProductModal" aria-label="Fechar">✕</button>
+    </div>
+
+    <form id="productForm" novalidate>
+      <div class="modal__body">
+
+        <label class="upload-box" for="productImageInput" tabindex="0">
+          <div class="upload-box__icon" aria-hidden="true">🖼</div>
+          <span id="uploadBoxText">Clique para adicionar uma foto do produto</span>
+          <input type="file" id="productImageInput" accept="image/*" style="display:none;">
+        </label>
+
+        <br>
+
+        <div class="form-grid" style="margin-top:16px;">
+          <div class="field field--half">
+            <label class="field__label" for="productName">Nome do produto</label>
+            <input type="text" id="productName" class="input" required aria-required="true">
+          </div>
+
+          <div class="field field--half">
+            <label class="field__label" for="productCategory">Categoria</label>
+            <select id="productCategory" class="select" required aria-required="true">
+              <option value="Saias">Saias</option>
+              <option value="Blusas">Blusas</option>
+              <option value="Vestidos">Vestidos</option>
+              <option value="Conjuntos">Conjuntos</option>
+            </select>
+          </div>
+
+          <div class="field field--half">
+            <label class="field__label" for="productPrice">Preço (R$)</label>
+            <input type="number" id="productPrice" class="input" min="0" step="0.01" required aria-required="true">
+          </div>
+
+          <div class="field field--half">
+            <label class="field__label" for="productStock">Estoque</label>
+            <input type="number" id="productStock" class="input" min="0" step="1" required aria-required="true">
+          </div>
+        </div>
+
+        <div class="field--full" style="margin-top:4px;">
+          <div class="switch-row">
+            <label class="field__label" for="productActive" style="font-size:13.5px; color: var(--ink);">Produto ativo</label>
+            <label class="switch">
+              <input type="checkbox" id="productActive" checked>
+              <span class="switch__track"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="field--full">
+          <div class="switch-row">
+            <label class="field__label" for="productFeatured" style="font-size:13.5px; color: var(--ink);">Produto em destaque</label>
+            <label class="switch">
+              <input type="checkbox" id="productFeatured">
+              <span class="switch__track"></span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal__footer">
+        <button type="button" class="btn btn--ghost" id="cancelProductModal">Cancelar</button>
+        <button type="submit" class="btn btn--primary" id="saveProductBtn">Salvar Produto</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ==========================================================
+     MODAL — CONFIRMAR EXCLUSÃO
+     ========================================================== -->
+<div class="modal-overlay" id="deleteModalOverlay">
+  <div class="modal modal--sm" role="alertdialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+    <div class="modal__header">
+      <h2 class="modal__title" id="deleteModalTitle">Excluir produto</h2>
+      <button class="modal__close" id="closeDeleteModal" aria-label="Fechar">✕</button>
+    </div>
+    <div class="modal__body">
+      <p style="font-size:13.5px; color: var(--ink-soft);">
+        Tem certeza de que deseja excluir <strong id="deleteProductName">este produto</strong>?
+        Esta ação não pode ser desfeita.
+      </p>
+    </div>
+    <div class="modal__footer">
+      <button type="button" class="btn btn--ghost" id="cancelDeleteModal">Cancelar</button>
+      <button type="button" class="btn btn--danger" id="confirmDeleteBtn">Excluir</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================================
+     TOASTS
+     ========================================================== -->
+<div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="true"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="../js/Dashboard/common.js"></script>
+
+<script src="../js/Dashboard/micro.js"></script>
+
+<script type="module" src="../js/Dashboard/produtos.js"></script>
+
+</body>
+</html>
