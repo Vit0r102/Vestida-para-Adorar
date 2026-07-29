@@ -265,15 +265,30 @@
         </div>
 
         <div class="field--full">
-          <div class="stock-preview">
-            <span class="stock-preview__label">Novo estoque</span>
-            <span class="stock-preview__value" id="stockPreviewValue">—</span>
-          </div>
+          <label class="field__label" for="movementReason">Motivo</label>
+          <select id="movementReason" class="select" required aria-required="true">
+            <option value="">Selecione o motivo</option>
+            <option value="Venda">Venda</option>
+            <option value="Reposição">Reposição</option>
+            <option value="Troca">Troca</option>
+            <option value="Devolução">Devolução</option>
+            <option value="Avaria">Avaria</option>
+            <option value="Correção">Correção</option>
+            <option value="Inventário">Inventário</option>
+            <option value="Outro">Outro</option>
+          </select>
         </div>
 
         <div class="field--full">
           <label class="field__label" for="movementNote">Observação (opcional)</label>
           <textarea id="movementNote" class="textarea" placeholder="Ex: recebimento de fornecedor, troca, avaria..."></textarea>
+        </div>
+
+        <div class="field--full">
+          <div class="stock-preview">
+            <span class="stock-preview__label">Novo estoque</span>
+            <span class="stock-preview__value" id="stockPreviewValue">—</span>
+          </div>
         </div>
 
       </div>

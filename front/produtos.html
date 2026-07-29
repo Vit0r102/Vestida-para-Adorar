@@ -270,6 +270,44 @@
           </div>
         </div>
 
+        <div class="field--full" style="margin-top:16px;">
+          <label class="field__label" for="productDescription">Descrição</label>
+          <textarea id="productDescription" class="input" rows="3"></textarea>
+        </div>
+
+        <div class="form-grid" style="margin-top:16px;">
+          <div class="field field--half">
+            <label class="field__label" for="productFabric">Tecido</label>
+            <input type="text" id="productFabric" class="input">
+          </div>
+
+          <div class="field field--half">
+            <label class="field__label" for="productDiscount">Desconto (%)</label>
+            <input type="number" id="productDiscount" class="input" min="0" step="1">
+          </div>
+        </div>
+
+        <div class="field--full" style="margin-top:16px;">
+          <label class="field__label">Tamanhos disponíveis</label>
+          <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:6px;">
+            <label class="switch-row" style="gap:6px; font-size:13.5px; color:var(--ink);">
+              <input type="checkbox" class="product-size-checkbox" value="42"> 42
+            </label>
+            <label class="switch-row" style="gap:6px; font-size:13.5px; color:var(--ink);">
+              <input type="checkbox" class="product-size-checkbox" value="44"> 44
+            </label>
+            <label class="switch-row" style="gap:6px; font-size:13.5px; color:var(--ink);">
+              <input type="checkbox" class="product-size-checkbox" value="46"> 46
+            </label>
+            <label class="switch-row" style="gap:6px; font-size:13.5px; color:var(--ink);">
+              <input type="checkbox" class="product-size-checkbox" value="48"> 48
+            </label>
+            <label class="switch-row" style="gap:6px; font-size:13.5px; color:var(--ink);">
+              <input type="checkbox" class="product-size-checkbox" value="50"> 50
+            </label>
+          </div>
+        </div>
+
         <div class="field--full" style="margin-top:4px;">
           <div class="switch-row">
             <label class="field__label" for="productActive" style="font-size:13.5px; color: var(--ink);">Produto ativo</label>
