@@ -66,9 +66,6 @@ function mostrarProdutos(produtos){
 
     produtos.forEach(produto => {
 
-          console.log(produto.id, typeof produto.id);
-
-
         const favorito =
         favoritos.includes(Number(produto.id));
 

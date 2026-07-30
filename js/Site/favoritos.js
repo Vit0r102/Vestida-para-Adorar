@@ -228,8 +228,6 @@ window.removerFavorito = removerFavorito;
 async function moverParaCarrinho(produtoId) {
 
     await adicionarAoCarrinho(produtoId);
-
-    console.log('Produto movido para o carrinho:', produtoId);
 }
 
 window.moverParaCarrinho = moverParaCarrinho;
@@ -247,8 +245,6 @@ async function moverTudoParaCarrinho() {
         await adicionarAoCarrinho(id);
 
     }
-
-    console.log('Todos os favoritos movidos para o carrinho.');
 }
 
 window.moverTudoParaCarrinho = moverTudoParaCarrinho;
@@ -639,5 +635,3 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(favAplicarAnimacoes, 700);
 
 });
-carregarFavoritos();
-atualizarContadorFavoritos();
