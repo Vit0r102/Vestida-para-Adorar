@@ -89,7 +89,7 @@ async function carregarFavoritos() {
             <div class="product fav-card" style="background:white; border-radius:30px;" data-id="${produto.id}">
 
                 <div class="product-img" style="border-radius:30px; position:relative;">
-                    <img src="${produto.imagem}" alt="${produto.nome}">
+                    <img src="${obterImagemProduto(produto.imagem)}" alt="${produto.nome}">
 
                     <!-- Botão de remover favorito -->
                     <button

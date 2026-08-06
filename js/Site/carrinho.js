@@ -142,7 +142,7 @@ async function carregarCarrinho() {
         container.innerHTML += `
             <div class="product" style="background:white; border-radius:30px;">
                 <div class="product-img" style="border-radius:30px;">
-                    <img src="${produto.imagem}" alt="${produto.nome}">
+                    <img src="${obterImagemProduto(produto.imagem)}" alt="${produto.nome}">
                 </div>
 
                 <div class="p-4" style="text-aling:center";>

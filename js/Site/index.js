@@ -119,7 +119,7 @@ function mostrarDestaques(produtos){
             <div class="product-img">
 
                 <img
-                    src="${produto.imagem}"
+                    src="${obterImagemProduto(produto.imagem)}"
                     alt="${produto.nome}"
                 >
 

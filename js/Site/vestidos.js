@@ -115,7 +115,7 @@ function mostrarProdutos(produtos){
 
             <div class="product-img">
 
-                <img src="${produto.imagem}" alt="${produto.nome}">
+                <img src="${obterImagemProduto(produto.imagem)}" alt="${produto.nome}">
 
                 
                 ${badge}
