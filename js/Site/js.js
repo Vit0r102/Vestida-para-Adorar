@@ -110,7 +110,7 @@
           tbEl.style.transform = 'translateY(0)';
         });
       }, 420);
-    }, 3500);
+    }, 5500);
   }
 
   /* ─── Animated Gold Divider Lines ─── */
@@ -121,7 +121,7 @@
         goldLineObserver.unobserve(e.target);
       }
     });
-  }, { threshold: 0.3 });
+  }, { threshold: 1.3 });
   document.querySelectorAll('.gold-line-animated').forEach(el => goldLineObserver.observe(el));
 
   /* ─── Counter Animation for Stats ─── */
