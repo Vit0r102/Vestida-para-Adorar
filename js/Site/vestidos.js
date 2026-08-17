@@ -107,8 +107,15 @@ function mostrarProdutos(produtos){
                 ${produto.tecido}
             `;
             }
+            
+            let descricao = '';
+            if (produto.descricao == null) {
+                descricao =``;}
 
-
+            if (produto.descricao){
+                descricao =`
+                ${produto.descricao}`;
+            }
 
         container.innerHTML += `
         <div class="product-card">
@@ -148,10 +155,14 @@ function mostrarProdutos(produtos){
                     </h3>
 
                     <p style="font-size:0.72rem;color:var(--ink-soft);margin-bottom:4px;">
-                        Tamanhos: ${produto.tamanho || '42 ao 50'}
+                        Tamanhos: ${produto.tamanho || 'Não especificado'}
                     </p>
                     <p style="font-size:0.72rem;color:var(--ink-soft);margin-bottom:4px;">
                         Tecido: ${tecido}
+                    </p>
+                    
+                    <p style="font-size:0.72rem;color:var(--ink-soft);margin-bottom:4px;">
+                    Descrição: ${descricao || 'Nenhum'}
                     </p>
 
                     <p style="font-size:0.8rem;color:var(--ink-soft);margin-bottom:4px;">

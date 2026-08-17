@@ -612,6 +612,7 @@
       border-radius: 20px;
       padding: 20px 24px;
       box-shadow: 0 8px 32px rgba(58,46,44,0.1);
+     /* animation: badgePulse 10s ease-in-out infinite, floatY 5s ease-in-out infinite;  para futuras...*/
       border: 1px solid rgba(201,169,110,0.2);
     }
 
