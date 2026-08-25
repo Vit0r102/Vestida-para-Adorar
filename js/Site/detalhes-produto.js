@@ -150,7 +150,7 @@ function montarBlocoPrecos(produto) {
         html += `
             <p style="font-size:0.95rem;color:var(--ink-soft);margin-bottom:18px;">
                 No cartão: R$ ${Number(produto.preco_cartao).toFixed(2)}
-                em até ${PARCELAS_CARTAO}x de R$ ${valorParcela.toFixed(2)} sem juros
+                em até ${PARCELAS_CARTAO}x de R$ ${valorParcela.toFixed(2)}
             </p>
         `;
     } else {
