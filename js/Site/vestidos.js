@@ -79,7 +79,7 @@ function mostrarProdutos(produtos){
             </div>
             `;
 
-        }if(produto.promoção){
+        }if(produto.promocao){
 
             badge = `
             <div class="product-badge" style="background:linear-gradient(135deg,var(--rose-muted),var(--rose-dark));">
@@ -169,9 +169,25 @@ function mostrarProdutos(produtos){
                         Estoque: ${produto.estoque}
                     </p>
 
-                    <p style="font-size:1rem;font-weight:600;color:var(--rose-dark);margin-bottom:4px;">
+                    <p style="font-size:1rem;font-weight:600;color:var(--rose-dark);margin-bottom:2px;">
                         R$ ${Number(produto.preco).toFixed(2)}
                     </p>
+                    ${produto.preco_pix != null
+                        ? `
+                        <p style="font-size:0.72rem;color:var(--ink-soft);margin-bottom:2px;">
+                            No Pix: <strong style="color:var(--rose-muted);">R$ ${Number(produto.preco_pix).toFixed(2)}</strong>
+                        </p>
+                        `
+                        : ''
+                    }
+                    ${produto.preco_cartao != null
+                        ? `
+                        <p style="font-size:0.72rem;color:var(--ink-soft);margin-bottom:8px;">
+                            No cartão: até 4x de R$ ${(Number(produto.preco_cartao) / 4).toFixed(2)}
+                        </p>
+                        `
+                        : ''
+                    }
                          ${produto.estoque > 0
                             ? `
                             <button

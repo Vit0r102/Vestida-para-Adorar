@@ -58,6 +58,8 @@ const dom = {
   productName: document.getElementById('productName'),
   productCategory: document.getElementById('productCategory'),
   productPrice: document.getElementById('productPrice'),
+  productPricePix: document.getElementById('productPricePix'),
+  productPriceCartao: document.getElementById('productPriceCartao'),
   productStock: document.getElementById('productStock'),
   productActive: document.getElementById('productActive'),
   productFeatured: document.getElementById('productFeatured'),
@@ -350,6 +352,8 @@ function abrirModalProduto(produto = null) {
     dom.productName.value = produto.nome;
     dom.productCategory.value = produto.categoria;
     dom.productPrice.value = produto.preco;
+    dom.productPricePix.value = produto.preco_pix ?? '';
+    dom.productPriceCartao.value = produto.preco_cartao ?? '';
     dom.productStock.value = produto.estoque;
     dom.productActive.checked = produto.ativo;
     dom.productFeatured.checked = produto.destaque;
@@ -436,10 +440,20 @@ if (state.editingId) {
 
 }
 
+  const precoPix = dom.productPricePix.value === ''
+    ? null
+    : parseFloat(dom.productPricePix.value);
+
+  const precoCartao = dom.productPriceCartao.value === ''
+    ? null
+    : parseFloat(dom.productPriceCartao.value);
+
   const payload = {
     nome: dom.productName.value.trim(),
     categoria: dom.productCategory.value,
     preco: parseFloat(dom.productPrice.value),
+    preco_pix: precoPix,
+    preco_cartao: precoCartao,
     estoque: parseInt(dom.productStock.value, 10),
     ativo: dom.productActive.checked,
     destaque: dom.productFeatured.checked,
@@ -499,20 +513,6 @@ if (state.editingId) {
         .remove([imagemAntiga]);
 
 }
-
-const { data, error } = await supabaseClient
-    .storage
-    .from("produtos")
-    .remove([imagemAntiga]);
-
-console.log("Imagem antiga:", imagemAntiga);
-console.log("Remove retornou:", data);
-console.log("Erro:", error);
-
-  fecharModalProduto();
-  state.page = 1;
-
-  await carregarProdutos();
 }
 
 function bindProductModal() {
