@@ -95,8 +95,6 @@ async function carregarProdutos(){
 
     produtos = data || [];
 
-    console.log("DATA DO SUPABASE");
-    console.table(data);
 
     render();
 }

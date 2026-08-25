@@ -1284,3 +1284,80 @@
     }
     #back-to-top-cr.visible { opacity:1; transform:translateY(0); }
     #back-to-top-cr:hover   { box-shadow:0 8px 24px rgba(201,169,110,0.3); transform:translateY(-2px); }
+
+    /* ═══════════════════════════════
+       PÁGINA DE DETALHES DO PRODUTO
+       (detalhes-produto.html)
+    ═══════════════════════════════ */
+    .pd-breadcrumb a { color: var(--ink-soft); text-decoration: none; transition: color 0.25s; }
+    .pd-breadcrumb a:hover { color: var(--rose-dark); }
+
+    .pd-loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px;
+      text-align: center;
+      gap: 16px;
+    }
+    .pd-spinner {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 3px solid var(--linen-dark);
+      border-top-color: var(--rose-dark);
+      animation: pdSpin 0.8s linear infinite;
+    }
+    @keyframes pdSpin { to { transform: rotate(360deg); } }
+
+    .pd-erro {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 90px 24px;
+      text-align: center;
+      gap: 14px;
+    }
+    .pd-erro-icon { font-size: 3rem; opacity: 0.6; }
+    .pd-erro h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--ink); }
+    .pd-erro p { color: var(--ink-soft); font-size: 0.9rem; max-width: 380px; line-height: 1.7; }
+
+    .pd-size-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      padding: 8px 14px;
+      border: 1.5px solid var(--linen-dark);
+      border-radius: 10px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--ink);
+      background: white;
+    }
+
+    .pd-btn-indisponivel {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 50px;
+      background: #e2ddd8;
+      color: #8a7d78;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: not-allowed;
+    }
+
+    .pd-gallery .product-img {
+      aspect-ratio: 4/5;
+      box-shadow: 0 16px 40px rgba(58,46,44,0.1);
+    }
+
+    @media (max-width: 1023px) {
+      .pd-gallery .product-img { aspect-ratio: 1/1; }
+    }

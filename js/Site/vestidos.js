@@ -118,7 +118,7 @@ function mostrarProdutos(produtos){
             }
 
         container.innerHTML += `
-        <div class="product-card">
+        <div class="product-card" onclick="window.location.href='detalhes-produto.html?id=${produto.id}'">
 
             <div class="product-img">
 
@@ -192,7 +192,7 @@ function mostrarProdutos(produtos){
                             ? `
                             <button
                                 class="btn-primary"
-                                onclick="adicionarAoCarrinho(${produto.id})"
+                                onclick="event.stopPropagation(); adicionarAoCarrinho(${produto.id})"
                                 style="
                                 width:100%;
                                 padding:10px;
