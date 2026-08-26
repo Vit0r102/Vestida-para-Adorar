@@ -23,7 +23,14 @@ const state = {
     perPage: 5,
 
     editingId: null,
-    deletingId: null
+    deletingId: null,
+
+    // Galeria de fotos do produto no modal (multi-imagem)
+    galeria: {
+        existentes: [],   // [{ id, imagem, ordem }] vindas do banco — id pode ser 'legado' (representa Produtos.imagem quando não há linhas em Produto_Imagens)
+        removidasIds: [], // ids marcados para excluir (numbers reais, ou 'legado')
+        novas: []          // File[] selecionados nesta sessão, ainda não enviados
+    }
 };
 
 /* --------------------------------------------------------------------------
@@ -67,7 +74,7 @@ const dom = {
   productFabric: document.getElementById('productFabric'),
   productDiscount: document.getElementById('productDiscount'),
   productImageInput: document.getElementById('productImageInput'),
-  uploadBoxText: document.getElementById('uploadBoxText'),
+  productGalleryGrid: document.getElementById('productGalleryGrid'),
 
   deleteModalOverlay: document.getElementById('deleteModalOverlay'),
   deleteProductName: document.getElementById('deleteProductName'),
@@ -84,8 +91,12 @@ async function carregarProdutos(){
     const { data, error } =
     await supabaseClient
         .from('Produtos')
-        .select('*')
-        .order('created_at', { ascending: false });
+        .select(`
+            *,
+            Produto_Imagens ( id, imagem, ordem )
+        `)
+        .order('created_at', { ascending: false })
+        .order('ordem', { foreignTable: 'Produto_Imagens', ascending: true });
 
     if(error){
         console.error(error);
@@ -337,6 +348,79 @@ function bindFilters() {
 }
 
 /* --------------------------------------------------------------------------
+   7A. GALERIA DE FOTOS DO PRODUTO (multi-imagem)
+   -------------------------------------------------------------------------- */
+function resetGaleria() {
+  state.galeria.existentes = [];
+  state.galeria.removidasIds = [];
+  state.galeria.novas = [];
+}
+
+function totalFotosGaleria() {
+  const restantes = state.galeria.existentes.filter(
+    (img) => !state.galeria.removidasIds.includes(img.id)
+  );
+  return restantes.length + state.galeria.novas.length;
+}
+
+function renderGaleria() {
+  const itens = [];
+
+  state.galeria.existentes.forEach((img) => {
+    if (!state.galeria.removidasIds.includes(img.id)) {
+      itens.push({ tipo: 'existente', dado: img });
+    }
+  });
+
+  state.galeria.novas.forEach((file, index) => {
+    itens.push({ tipo: 'nova', dado: file, index });
+  });
+
+  dom.productGalleryGrid.innerHTML = '';
+
+  itens.forEach((item, posicao) => {
+    const url = item.tipo === 'existente'
+      ? obterImagemProduto(item.dado.imagem)
+      : URL.createObjectURL(item.dado);
+
+    const idParaRemover = item.tipo === 'existente'
+      ? (item.dado.id === 'legado' ? `'legado'` : item.dado.id)
+      : null;
+
+    const onclickRemover = item.tipo === 'existente'
+      ? `removerFotoExistente(${idParaRemover})`
+      : `removerFotoNova(${item.index})`;
+
+    dom.productGalleryGrid.innerHTML += `
+      <div class="product-gallery-item">
+        <img src="${url}" alt="Foto ${posicao + 1} do produto">
+        ${posicao === 0 ? '<span class="product-gallery-item__cover-tag">Capa</span>' : ''}
+        <button type="button" class="product-gallery-item__remove" onclick="${onclickRemover}" aria-label="Remover esta foto">✕</button>
+      </div>
+    `;
+  });
+
+  if (itens.length < 4) {
+    dom.productGalleryGrid.innerHTML += `
+      <button type="button" class="product-gallery-add" id="btnAdicionarFoto" aria-label="Adicionar foto">＋</button>
+    `;
+    document.getElementById('btnAdicionarFoto').addEventListener('click', () => dom.productImageInput.click());
+  }
+}
+
+function removerFotoExistente(id) {
+  state.galeria.removidasIds.push(id);
+  renderGaleria();
+}
+window.removerFotoExistente = removerFotoExistente;
+
+function removerFotoNova(index) {
+  state.galeria.novas.splice(index, 1);
+  renderGaleria();
+}
+window.removerFotoNova = removerFotoNova;
+
+/* --------------------------------------------------------------------------
    7. MODAL — NOVO / EDITAR PRODUTO
    -------------------------------------------------------------------------- */
 function abrirModalProduto(produto = null) {
@@ -344,7 +428,7 @@ function abrirModalProduto(produto = null) {
   dom.productModalTitle.textContent = produto ? 'Editar Produto' : 'Novo Produto';
 
   dom.productForm.reset();
-  dom.uploadBoxText.textContent = 'Clique para adicionar uma foto do produto';
+  resetGaleria();
 
   if (produto) {
     dom.productName.value = produto.nome;
@@ -368,10 +452,25 @@ function abrirModalProduto(produto = null) {
       cb.checked = tamanhosAtuais.includes(cb.value);
     });
 
+    const imagensCadastradas = Array.isArray(produto.Produto_Imagens) ? produto.Produto_Imagens : [];
+
+    if (imagensCadastradas.length > 0) {
+      state.galeria.existentes = imagensCadastradas
+        .slice()
+        .sort((a, b) => (a.ordem ?? 0) - (b.ordem ?? 0))
+        .map((img) => ({ id: img.id, imagem: img.imagem, ordem: img.ordem }));
+    } else if (produto.imagem) {
+      // Produto antigo: só tem a foto em Produtos.imagem, nunca migrou
+      // pra Produto_Imagens. Mostra como a primeira foto da galeria.
+      state.galeria.existentes = [{ id: 'legado', imagem: produto.imagem, ordem: 0 }];
+    }
+
   } else {
     dom.productActive.checked = true;
     dom.productFeatured.checked = false;
   }
+
+  renderGaleria();
 
   dom.productModalOverlay.classList.add('is-open');
   dom.productName.focus();
@@ -407,12 +506,20 @@ async function salvarProduto(e) {
     ? 0
     : parseFloat(dom.productDiscount.value);
 
-  let imageUrl;
-  const arquivo = dom.productImageInput.files[0];
+  const precoPix = dom.productPricePix.value === ''
+    ? null
+    : parseFloat(dom.productPricePix.value);
 
-  if (arquivo) {
+  const precoCartao = dom.productPriceCartao.value === ''
+    ? null
+    : parseFloat(dom.productPriceCartao.value);
+
+  // ── 1. Upload das fotos novas selecionadas nesta sessão ──────────────
+  const novosNomes = [];
+
+  for (const arquivo of state.galeria.novas) {
     const extensao = arquivo.name.split('.').pop();
-    const nomeArquivo = `produto_${Date.now()}.${extensao}`;
+    const nomeArquivo = `produto_${Date.now()}_${novosNomes.length}.${extensao}`;
 
     const { error: erroUpload } = await supabaseClient
         .storage
@@ -421,30 +528,22 @@ async function salvarProduto(e) {
 
     if (erroUpload) {
         console.error(erroUpload);
-        showToast('Erro ao enviar a imagem.', 'danger');
+        showToast('Erro ao enviar uma das fotos.', 'danger');
         return;
     }
-    imageUrl = nomeArquivo;
+
+    novosNomes.push(nomeArquivo);
   }
-  let imagemAntiga = null;
 
-if (state.editingId) {
+  // ── 2. Galeria final (o que sobrou de existente + o que subiu agora) ─
+  const restantes = state.galeria.existentes.filter(
+    (img) => !state.galeria.removidasIds.includes(img.id)
+  );
 
-    const produtoAtual = produtos.find(
-        p => p.id === state.editingId
-    );
-
-    imagemAntiga = produtoAtual?.imagem;
-
-}
-
-  const precoPix = dom.productPricePix.value === ''
-    ? null
-    : parseFloat(dom.productPricePix.value);
-
-  const precoCartao = dom.productPriceCartao.value === ''
-    ? null
-    : parseFloat(dom.productPriceCartao.value);
+  const galeriaFinal = [
+    ...restantes,
+    ...novosNomes.map((imagem) => ({ id: null, imagem }))
+  ];
 
   const payload = {
     nome: dom.productName.value.trim(),
@@ -459,16 +558,19 @@ if (state.editingId) {
     tecido: dom.productFabric.value.trim(),
     tamanho: tamanhosSelecionados.join(', '),
     desconto: desconto,
-    promocao: desconto > 0
+    promocao: desconto > 0,
+    // A capa (Produtos.imagem) é sempre a primeira foto da galeria — é o
+    // que o grid da loja, a tabela do admin e a Visão Geral leem direto,
+    // sem passar por Produto_Imagens.
+    imagem: galeriaFinal.length > 0 ? galeriaFinal[0].imagem : null
   };
-
-  if (imageUrl) {
-    payload.imagem = imageUrl;
-  }
 
   if (!state.editingId) {
     payload.novo = true;
   }
+
+  // ── 3. Salva o produto (insert ou update) e garante o id ─────────────
+  let produtoId = state.editingId;
 
   if (state.editingId) {
     const { error } =
@@ -486,10 +588,12 @@ if (state.editingId) {
     showToast('Produto atualizado com sucesso.');
 
   } else {
-    const { error } =
+    const { data: novoProduto, error } =
     await supabaseClient
         .from('Produtos')
-        .insert(payload);
+        .insert(payload)
+        .select()
+        .single();
 
     if (error) {
         console.error(error);
@@ -497,20 +601,89 @@ if (state.editingId) {
         return;
     }
 
+    produtoId = novoProduto.id;
     showToast('Produto cadastrado com sucesso.');
   }
-  if (
-    imageUrl &&
-    imagemAntiga &&
-    imagemAntiga !== payload.imagem
-) {
 
-    await supabaseClient
+  // ── 4. Sincroniza Produto_Imagens ─────────────────────────────────────
+
+  // Remove do banco as linhas que a admin marcou com o "×" (a foto
+  // 'legado' nunca teve linha própria, então é ignorada aqui).
+  const idsParaRemoverDoBanco = state.galeria.removidasIds.filter((id) => id !== 'legado');
+
+  if (idsParaRemoverDoBanco.length > 0) {
+    const { error: erroRemoverImagens } = await supabaseClient
+        .from('Produto_Imagens')
+        .delete()
+        .in('id', idsParaRemoverDoBanco);
+
+    if (erroRemoverImagens) {
+        console.error('Erro ao remover imagens antigas:', erroRemoverImagens);
+    }
+  }
+
+  // Se o produto passou a ter mais de 1 foto, toda foto precisa de uma
+  // linha real em Produto_Imagens — inclusive uma foto legado que só
+  // existia em Produtos.imagem, senão ela desaparece do carrossel da loja
+  // (que ignora Produtos.imagem assim que existe qualquer linha lá).
+  if (galeriaFinal.length > 1) {
+    const linhasParaInserir = [];
+
+    const legado = restantes.find((img) => img.id === 'legado');
+    if (legado) {
+      linhasParaInserir.push({
+        produto_id: produtoId,
+        imagem: legado.imagem,
+        ordem: 0 // sempre a mais baixa: continua sendo a primeira/capa
+      });
+    }
+
+    const maiorOrdemExistente = restantes.reduce((max, img) => {
+      return typeof img.id === 'number' ? Math.max(max, img.ordem || 0) : max;
+    }, 0);
+
+    let proximaOrdem = maiorOrdemExistente + 1;
+    novosNomes.forEach((nomeArquivo) => {
+      linhasParaInserir.push({
+        produto_id: produtoId,
+        imagem: nomeArquivo,
+        ordem: proximaOrdem++
+      });
+    });
+
+    if (linhasParaInserir.length > 0) {
+      const { error: erroInserirImagens } = await supabaseClient
+          .from('Produto_Imagens')
+          .insert(linhasParaInserir);
+
+      if (erroInserirImagens) {
+          console.error('Erro ao salvar novas imagens:', erroInserirImagens);
+      }
+    }
+  }
+
+  // ── 5. Limpa do Storage os arquivos das fotos removidas ──────────────
+  const arquivosParaRemoverDoStorage = state.galeria.existentes
+    .filter((img) => state.galeria.removidasIds.includes(img.id))
+    .map((img) => img.imagem)
+    .filter((nome) => nome && !nome.startsWith('http'));
+
+  if (arquivosParaRemoverDoStorage.length > 0) {
+    const { error: erroRemoverStorage } = await supabaseClient
         .storage
-        .from("produtos")
-        .remove([imagemAntiga]);
+        .from('produtos')
+        .remove(arquivosParaRemoverDoStorage);
 
-}
+    if (erroRemoverStorage) {
+        console.error('Erro ao remover fotos do storage:', erroRemoverStorage);
+    }
+  }
+
+  resetGaleria();
+  fecharModalProduto();
+  state.page = 1;
+
+  await carregarProdutos();
 }
 
 function bindProductModal() {
@@ -523,8 +696,26 @@ function bindProductModal() {
   dom.productForm.addEventListener('submit', salvarProduto);
 
   dom.productImageInput.addEventListener('change', () => {
-    const file = dom.productImageInput.files[0];
-    dom.uploadBoxText.textContent = file ? file.name : 'Clique para adicionar uma foto do produto';
+    const arquivosSelecionados = Array.from(dom.productImageInput.files || []);
+    const vagas = 4 - totalFotosGaleria();
+
+    if (arquivosSelecionados.length === 0) return;
+
+    if (vagas <= 0) {
+      showToast('Você já atingiu o limite de 4 fotos por produto.', 'danger');
+      dom.productImageInput.value = '';
+      return;
+    }
+
+    const aceitos = arquivosSelecionados.slice(0, vagas);
+
+    if (arquivosSelecionados.length > vagas) {
+      showToast(`Só cabiam mais ${vagas} foto${vagas === 1 ? '' : 's'} — o restante não foi adicionado.`, 'danger');
+    }
+
+    state.galeria.novas.push(...aceitos);
+    dom.productImageInput.value = '';
+    renderGaleria();
   });
 }
 

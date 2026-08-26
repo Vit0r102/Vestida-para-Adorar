@@ -231,13 +231,14 @@
     <form id="productForm" novalidate>
       <div class="modal__body">
 
-        <label class="upload-box" for="productImageInput" tabindex="0">
-          <div class="upload-box__icon" aria-hidden="true">🖼</div>
-          <span id="uploadBoxText">Clique para adicionar uma foto do produto</span>
-          <input type="file" id="productImageInput" accept="image/*" style="display:none;">
-        </label>
-
-        <br>
+        <div class="field--full" style="margin-bottom:16px;">
+          <label class="field__label" style="margin-bottom:8px;">Fotos do produto (até 4)</label>
+          <div class="product-gallery-grid" id="productGalleryGrid"><!-- preenchido via JavaScript --></div>
+          <input type="file" id="productImageInput" accept="image/*" multiple style="display:none;">
+          <p style="font-size:11px;color:var(--ink-faint);margin-top:8px;">
+            A primeira foto é usada como capa do produto na loja e nas listagens.
+          </p>
+        </div>
 
         <div class="form-grid" style="margin-top:16px;">
           <div class="field field--half">
