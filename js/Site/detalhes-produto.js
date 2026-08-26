@@ -418,7 +418,7 @@ function mostrarProdutoDetalhe(produto) {
 
         ${montarAcaoCompra(produto)}
 
-        <a href="Vestidos.html" class="btn-outline" style="margin-top:16px;width:100%;justify-content:center;">
+        <a href="Vestidos.html#Loja" class="btn-outline" style="margin-top:16px;width:100%;justify-content:center;">
             ← Voltar para a loja
         </a>
     `;
