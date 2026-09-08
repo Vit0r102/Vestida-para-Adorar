@@ -121,7 +121,7 @@
         goldLineObserver.unobserve(e.target);
       }
     });
-  }, { threshold: 1.3 });
+  }, { threshold: 1 });
   document.querySelectorAll('.gold-line-animated').forEach(el => goldLineObserver.observe(el));
 
   /* ─── Counter Animation for Stats ─── */

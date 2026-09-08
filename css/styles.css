@@ -1360,7 +1360,7 @@
     }
 
     @media (max-width: 1023px) {
-      .pd-gallery .product-img { aspect-ratio: 0/1; }
+      .pd-gallery .product-img { aspect-ratio: 1/2; }
     }
 
     /* ─── Carrossel de imagens (Produto_Imagens) ─── */
